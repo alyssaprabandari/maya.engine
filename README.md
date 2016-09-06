@@ -3,6 +3,20 @@ Multi Tenant Application Engine
 
 Automated Testing is not finished
 
+Please create settings-development.json, e.g.:
+{
+  "public": {},
+  "private": {}
+}
+
+meteor npm install
+
+meteor npm start
+
+in other console, run meteor mongo
+insert manually to mongodb
+
+
 <table>
   <tbody>
     <tr>

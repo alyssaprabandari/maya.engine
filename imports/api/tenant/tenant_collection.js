@@ -86,6 +86,10 @@ Tenant.schema = new SimpleSchema({
     type: [ _PageSchema ]
   },
 
+  isPublicMenuInAuthNav: {
+    type: Boolean
+  },
+
   roles: {
     type: [ String ],
   },
@@ -148,6 +152,7 @@ Tenant.publicFields = {
   description 	: 1,
   index         : 1,
   pages         : 1,
+  isPublicMenuInAuthNav : 1,
   type          : 1,
   status        : 1,
 };

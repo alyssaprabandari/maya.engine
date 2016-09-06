@@ -19,10 +19,12 @@ const requireAuth = (nextState, replace) => {
     });
   }else{
     const page = _.findWhere(tenant.pages, {path:nextState.routes[1].path});
-    if( !Roles.userIsInRole(Meteor.userId(), page.roles, tenant.domain) )
+    if( !Roles.userIsInRole(Meteor.userId(), page.roles, tenant.domain) ){
+      Bert.alert('Your User Right is not Enough', 'danger');
       replace({
-        pathname: '/not-found'
-      });   
+        pathname: '/error'
+      });
+    };   
   };
 };
 
@@ -76,7 +78,7 @@ Meteor.startup(() => {
             document.getElementById('react-root').innerHTML="";
             render(
               <Router history={ browserHistory }>
-                <Route path="/" component={ widgetImporter(tenant.layout.widget) } >
+                <Route path="/" component={ widgetImporter(tenant.layout.appWidget) } >
                   { renderIndexRoute() }
                   { tenant.pages.map((page) => ( renderDynamicRoute(page) ) ) }
                   <Route path="/error" components={ {widgetErrorPage:ErrorPage} } />
@@ -90,6 +92,7 @@ Meteor.startup(() => {
             Bert.alert('Domain Error', 'danger');
           }
         }catch(exception){
+          console.log(exception);
           Bert.alert('Configuration Error', 'danger');
         }
       });

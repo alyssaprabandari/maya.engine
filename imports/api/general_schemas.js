@@ -5,11 +5,12 @@ export const _LayoutSchema = new SimpleSchema({
     type: String,
     allowedValues: ["Bootstrap","MaterialUI"],
   },
-  widget: {
+  appWidget: {
     type: String,
   },
   cssUrl: {
     type: SimpleSchema.RegEx.Url,
+    optional: true,
   },
 });
 
@@ -27,6 +28,10 @@ export const _PageSchema = new SimpleSchema({
   widgets: {
     type: [ String ],
   },
+  menuNr:{
+    type: Number,
+    optional: true,
+  }
 });
 
 export const _OwnerSchema = new SimpleSchema({

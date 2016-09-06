@@ -2,6 +2,10 @@
   "name": "maya.network",
   "version": "0.0.1",
   "description": "Maya Application Engine",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnsonchandra/maya.network.git"
+  },
   "scripts": {
     "start": "meteor --settings settings-development.json",
     "test": "meteor test --driver-package practicalmeteor:mocha --port 5000",
