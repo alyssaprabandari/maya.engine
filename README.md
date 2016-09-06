@@ -16,4 +16,4 @@ Automated Testing is not finished
   </tbody>
 </table>
 
-[Read the Documentation](http://themeteorchef.com/base)
+[Read the Documentation of MeteorChef Base](http://themeteorchef.com/base)
