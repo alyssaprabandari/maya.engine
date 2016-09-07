@@ -14,7 +14,6 @@ import { getCurrentUserRootDomain } from '/imports/api/general/server/general_fu
 
 Meteor.publish(apiName.getTenantInfo, function getTenantWidgets(pageName){
   try{
-    // Meteor._sleepForMs(10000);
     const query = {
       domain: getCurrentUserRootDomain(this.connection),
       status: 'Active',

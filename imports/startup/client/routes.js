@@ -30,9 +30,11 @@ const requireAuth = (nextState, replace) => {
 
 const renderIndexRoute = () => {
   let components = {};
+  let indexWidget = 1;
 
   tenant.index.widgets.forEach( (widget)=>{
-    components['widget'+widget] = widgetImporter(widget);
+    components['widget'+widget+'_'+indexWidget] = widgetImporter(widget);
+    indexWidget++;
   });
                 
   if(tenant.index.roles && tenant.index.roles.length > 0)
@@ -43,9 +45,10 @@ const renderIndexRoute = () => {
 
 const renderDynamicRoute = (page) => {
   let components = {};
-  
+  let indexWidget = 1;
   page.widgets.forEach( (widget)=>{
-    components['widget'+widget] = widgetImporter(widget);
+    components['widget'+widget+'_'+indexWidget] = widgetImporter(widget);
+    indexWidget++;
   });
 
   if(page.roles && page.roles.length > 0)
