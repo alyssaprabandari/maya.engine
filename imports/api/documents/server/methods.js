@@ -1,7 +1,9 @@
-import { Documents } from './documents';
+import { Documents } from '../documents';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { rateLimit } from '../../modules/rate-limit.js';
+import { rateLimit } from '/imports/modules/rate-limit.js';
+
+import { isUserHasAccess } from '/imports/api/general/server/general_functions';
 
 export const insertDocument = new ValidatedMethod({
   name: 'documents.insert',
@@ -9,6 +11,7 @@ export const insertDocument = new ValidatedMethod({
     title: { type: String },
   }).validator(),
   run(document) {
+    isUserHasAccess(this.userId, this.connection, 'documents.insert', 'Method');
     Documents.insert(document);
   },
 });

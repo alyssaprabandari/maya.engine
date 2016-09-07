@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _RefSchema, _OwnerSchema, _PageSchema, _LayoutSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _RefSchema, _OwnerSchema, _PageSchema, _LayoutSchema, _ApiSchema } from '/imports/api/general_schemas';
 
 import { Log } from '/imports/api/log/log_collection';
 
@@ -95,6 +95,10 @@ Tenant.schema = new SimpleSchema({
   },
   standardRole: {
     type: String,
+  },
+
+  apis: {
+    type: [ _ApiSchema ],
   },
 
   currency: {

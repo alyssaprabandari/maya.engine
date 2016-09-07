@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row, Col, ListGroupItem, FormControl, Button } from 'react-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { updateDocument, removeDocument } from '/imports/api/documents/methods.js';
+// import { updateDocument, removeDocument } from '/imports/api/documents/methods.js';
 
 const handleUpdateDocument = (documentId, event) => {
   const title = event.target.value.trim();
   if (title !== '' && event.keyCode === 13) {
-    updateDocument.call({
+    Meteor.call('updateDocument',{
       _id: documentId,
       update: { title },
     }, (error) => {
@@ -25,7 +25,7 @@ const handleRemoveDocument = (documentId, event) => {
   // disable the eslint `no-alert`
   // eslint-disable-next-line no-alert
   if (confirm('Are you sure? This is permanent.')) {
-    removeDocument.call({
+    Meteor.call('removeDocument',{
       _id: documentId,
     }, (error) => {
       if (error) {

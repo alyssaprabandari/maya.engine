@@ -2,7 +2,7 @@ import '../../api/general/server/general_methods.js';
 import '../../api/general/server/general_functions.js';
 
 
-import '../../api/documents/methods.js';
+import '../../api/documents/server/methods.js';
 import '../../api/documents/server/publications.js';
 
 import '../../api/koleksi/methods.js';

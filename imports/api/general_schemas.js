@@ -1,5 +1,19 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+export const _ApiSchema = new SimpleSchema({
+  apiName: {
+    type: String,
+  },
+  roles: {
+    type: [ String ],
+    optional: true
+  },
+  type: {
+    type: String,
+    allowedValues: ["Method","Subscription"],
+  },
+});
+
 export const _LayoutSchema = new SimpleSchema({
   framework: {
     type: String,
