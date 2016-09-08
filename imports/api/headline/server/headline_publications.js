@@ -2,14 +2,12 @@ import { Meteor } from 'meteor/meteor';
 
 import { Headline } from '/imports/api/headline/headline_collection';
 
-import { Log } from '/imports/api/log/log_collection';
-
 import { Tenant } from '/imports/api/tenant/tenant_collection';
 
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './headline_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 Meteor.publishComposite(apiName.headlineList, function headlineList() {
   try{

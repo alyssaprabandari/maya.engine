@@ -7,41 +7,17 @@ import { _ImageSchema, _RefSchema } from '/imports/api/general_schemas';
 
 import { Tenant } from '/imports/api/tenant/tenant_collection.js';
 
-import { Log } from '/imports/api/log/log_collection.js';
-
 class OrgCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);
-    Log.insert({
-      refName     : 'Org',
-      refId       : result,
-      refDoc      : JSON.stringify(doc),
-      type        : 'insert',
-      result      : result
-    });
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-    Log.insert({
-      refName     : 'Org',
-      refId       : selector,
-      refDoc      : JSON.stringify(modifier),
-      type        : 'update',
-      result      : result
-    });
     return result;
   }
   remove(selector) {
-    const refDoc = Org.findOne(selector);
     const result = super.remove(selector);
-    Log.insert({
-      refName     : 'Org',
-      refId       : selector,
-      refDoc      : JSON.stringify(refDoc),
-      type        : 'remove',
-      result      : result
-    });
     return result;
   }
 }

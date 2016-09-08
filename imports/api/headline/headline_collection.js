@@ -5,41 +5,17 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _RefSchema } from '/imports/api/general_schemas';
 
-import { Log } from '/imports/api/log/log_collection.js';
-
 class HeadlineCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);
-    Log.insert({
-      refName			: 'Headline',
-      refId 			: result,
-      refDoc 			: JSON.stringify(doc),
-      type 				: 'insert',
-      result 			: result
-    });
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-		Log.insert({
-      refName			: 'Headline',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(modifier),
-      type 				: 'update',
-      result 			: result
-    });
     return result;
   }
   remove(selector) {
-  	const refDoc = Headline.findOne(selector);
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'Headline',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(refDoc),
-      type 				: 'remove',
-      result 			: result
-    });
     return result;
 	}
 };

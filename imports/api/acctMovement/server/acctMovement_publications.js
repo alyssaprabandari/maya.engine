@@ -6,7 +6,7 @@ import { Acct } from '/imports/api/acct/acct_collection.js';
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './acctMovement_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 // now all publications for admistrators
 Meteor.publishComposite(apiName.admAcctMovementDetail, function admAcctMovementDetail(acctMovementId) {

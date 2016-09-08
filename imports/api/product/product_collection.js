@@ -5,8 +5,6 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _ImageSchema, _RefSchema } from '/imports/api/general_schemas';
 
-import { Log } from '/imports/api/log/log_collection';
-
 import { Member } from '/imports/api/member/member_collection';
 import { Org } from '/imports/api/org/org_collection';
 
@@ -14,38 +12,14 @@ import { Org } from '/imports/api/org/org_collection';
 class ProductCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);    
-    Log.insert({
-      refName			: 'Product',
-      refId 			: result,
-      refDoc 			: JSON.stringify(doc),
-      type 				: 'insert',
-      result 			: result
-    });
     return result;
   }
-  
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-		Log.insert({
-      refName			: 'Product',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(modifier),
-      type 				: 'update',
-      result 			: result
-    });
-    return result;
+		return result;
   }
-  
   remove(selector) {
-    const refDoc = Product.findOne(selector);
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'Product',
-      refId 			: selector,
-      refDoc      : JSON.stringify(refDoc),
-      type 				: 'remove',
-      result 			: result
-    });
     return result;
   }
 };

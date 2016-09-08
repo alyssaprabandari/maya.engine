@@ -1,15 +1,11 @@
-import '../../api/general/server/general_methods.js';
-import '../../api/general/server/general_functions.js';
+import '../../api/general/server/general_server_methods.js';
+import '../../api/general/server/general_server_functions.js';
 
+import '../../api/api/server/api_methods.js';
+import '../../api/api/server/api_publications.js';
 
-import '../../api/documents/server/methods.js';
-import '../../api/documents/server/publications.js';
-
-import '../../api/koleksi/methods.js';
-import '../../api/koleksi/server/publications.js';
-
-import '../../api/log/server/log_methods.js';
-import '../../api/log/server/log_publications.js';
+import '../../api/document/server/document_methods.js';
+import '../../api/document/server/document_publications.js';
 
 import '../../api/tenant/server/tenant_methods.js';
 import '../../api/tenant/server/tenant_publications.js';

@@ -3,42 +3,20 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { Log } from '/imports/api/log/log_collection.js';
-
 import { Acct } from '../acct/acct_collection'
 import { Org } from '../org/org_collection'
 
 class LeadCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);
-    Log.insert({
-      refName			: 'lead',
-      type 				: 'insert',
-      refId 			: result,
-      refObject 	: JSON.stringify(doc),
-      result 			: result
-    });
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-    Log.insert({
-      refName			: 'lead',
-      type 				: 'update',
-      refId 			: selector,
-      refObject 	: JSON.stringify(modifier),
-      result 			: result
-    });
     return result;
   }
   remove(selector) {
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'lead',
-      type 				: 'remove',
-      refId 			: selector,
-      result 			: result
-    });
     return result;
   }
 }

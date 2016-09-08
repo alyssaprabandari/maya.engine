@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 
 import { Member } from '/imports/api/member/member_collection';
 
-import { Log } from '/imports/api/log/log_collection';
-
 import { Tenant } from '/imports/api/tenant/tenant_collection';
 import { Org } from '/imports/api/org/org_collection';
 import { Acct } from '/imports/api/acct/acct_collection';
@@ -11,7 +9,7 @@ import { Acct } from '/imports/api/acct/acct_collection';
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './member_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 //all publications for own account
 Meteor.publishComposite(apiName.myDetail, function myDetail(){
@@ -140,10 +138,6 @@ Meteor.publishComposite(apiName.admMemberDetail, function admMemberDetail(member
             ]
           });
         },
-      },{
-        find(member) {
-          return Log.find({refName:'Member',refId:member._id},{sort: {timestamp: -1}});
-        },
       }],
     };
 
@@ -176,8 +170,6 @@ Meteor.publishComposite(apiName.admMemberList, function admMemberList(searchText
         };
         return Member.find(query,options);
       },
-
-      children: [],
     };
 
   }catch(exception){

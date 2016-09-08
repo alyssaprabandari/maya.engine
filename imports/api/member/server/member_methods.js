@@ -10,7 +10,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 import { constructQuery } from '/imports/modules/utils';
 
-import { checkTenant, checkOrg, getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { checkTenant, checkOrg, getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 export const apiName = {
   memberSignup         : 'member.signup',

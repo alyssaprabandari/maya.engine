@@ -2,14 +2,13 @@ import { Meteor } from 'meteor/meteor';
 
 import { Tenant } from '/imports/api/tenant/tenant_collection.js';
 
-import { Log } from '/imports/api/log/log_collection.js';
 // import { Member } from '/imports/api/member/member_collection.js';
 // import { Org } from '/imports/api/org/org_collection.js';
 
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './tenant_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 
 Meteor.publish(apiName.getTenantInfo, function getTenantWidgets(pageName){
@@ -87,12 +86,6 @@ Meteor.publishComposite(apiName.admTenantDetail, function admTenantDetail(tenant
 
         return Tenant.find(query, options);
       },
-
-      children: [{
-        find(tenant) {
-          return Log.find({refName:'Tenant',refId:tenant._id});
-        },
-      }],
     };
 
   }catch(exception){

@@ -6,7 +6,7 @@ import { Org } from '/imports/api/org/org_collection';
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './lead_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 
 // now all publications for admistrators

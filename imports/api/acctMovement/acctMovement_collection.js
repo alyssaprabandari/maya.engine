@@ -6,7 +6,6 @@ import { Factory } from 'meteor/dburles:factory';
 import { _RefSchema } from '/imports/api/general_schemas';
 
 import { AcctTrx } from '/imports/api/acctTrx/acctTrx_collection';
-import { Log } from '/imports/api/log/log_collection';
 
 class AcctMovementCollection extends Mongo.Collection {
   insert(doc, callback) {

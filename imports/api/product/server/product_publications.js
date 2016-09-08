@@ -2,15 +2,13 @@ import { Meteor } from 'meteor/meteor';
 
 import { Product } from '/imports/api/product/product_collection.js';
 
-import { Log } from '/imports/api/log/log_collection.js';
-
 import { Member } from '/imports/api/member/member_collection.js';
 import { Org } from '/imports/api/org/org_collection.js';
 
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './product_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 //all publications for own account
 Meteor.publish(apiName.myProductList, function myProductList(){
@@ -74,10 +72,6 @@ Meteor.publishComposite(apiName.admProductDetail, function admProductDetail(prod
             return Member.find({ _id: product.ownerId });
           if(product.ownerType === "Org")
             return Org.find({ _id: product.ownerId });
-        },
-      },{
-        find(product) {
-          return Log.find({refName:'Product',refId:product._id});
         },
       }],
     };

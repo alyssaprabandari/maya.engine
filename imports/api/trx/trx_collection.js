@@ -3,56 +3,17 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { Log } from '/imports/api/log/log_collection.js';
-
 class TrxCollection extends Mongo.Collection {
-  insert(doc, callback) {
-
-  	const stringDoc = JSON.stringify(doc);
-
-    doc.logs = [{
-    	type 	:'insert',
-    	doc 	: JSON.parse(stringDoc),
-    }];
-    
-    const result = super.insert(doc, callback);    
-    Log.insert({
-      refName			: 'Trx',
-      refId 			: result,
-      refDoc 			: doc,
-      type 				: 'insert',
-      result 			: result
-    });
-
+	insert(doc, callback) {
+    const result = super.insert(doc, callback);
     return result;
-  }
-  
+  }  
   update(selector, modifier) {
-    //FIXME modifier harus diinject doc.logs
-
     const result = super.update(selector, modifier);
-    
-		Log.insert({
-      refName			: 'Trx',
-      refId 			: selector,
-      refDoc 			: modifier,
-      type 				: 'update',
-      result 			: result
-    });
-    
     return result;
   }
-  
   remove(selector) {
-  	//FIXME consider NOT remove but only updating status to DELETED
-
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'Trx',
-      refId 			: selector,
-      type 				: 'remove',
-      result 			: result
-    });
     return result;
   }
 };

@@ -8,7 +8,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 import { constructQuery } from '/imports/modules/utils';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 export const apiName = {
   admOrgList        : 'adm.org.list',

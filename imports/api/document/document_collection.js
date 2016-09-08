@@ -3,29 +3,31 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-export const Koleksi = new Mongo.Collection('Koleksi');
+export const Document = new Mongo.Collection('document');
 
-Koleksi.allow({
+Document.allow({
   insert: () => false,
   update: () => false,
   remove: () => false,
 });
 
-Koleksi.deny({
+Document.deny({
   insert: () => true,
   update: () => true,
   remove: () => true,
 });
 
-Koleksi.schema = new SimpleSchema({
+Document.schema = new SimpleSchema({
   title: {
     type: String,
-    label: 'The title of the koleksi.',
+    label: 'The title of the document.',
   },
+
+
 });
 
-Koleksi.attachSchema(Koleksi.schema);
+Document.attachSchema(Document.schema);
 
-Factory.define('koleksi', Koleksi, {
+Factory.define('document', Document, {
   title: () => faker.hacker.phrase(),
 });

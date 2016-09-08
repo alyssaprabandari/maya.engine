@@ -55,15 +55,23 @@ export const getCurrentUserRootDomain = (connection) => {
 export const isUserHasAccess = (userId, connection, apiName, apiType) => {
   const currentUserRootDomain = getCurrentUserRootDomain(connection);
   const tenant = Tenant.findOne({domain:currentUserRootDomain,status:'Active'});
-  const api = _.findWhere(tenant.apis, {apiName:apiName, type:apiType});
+  const api = _.findWhere(tenant.APIs, {name:apiName, type:apiType});
 
   if(!api)
     throw new Meteor.Error(443, 'API not found');
-
   if(api.roles && api.roles.length > 0 && !Roles.userIsInRole(userId, api.roles, currentUserRootDomain))
-      throw new Meteor.Error(444, 'Not enough Right');
-
+    throw new Meteor.Error(444, 'Not enough Right');
+  
   return true;
 };
 
+export const initAPIsToDB = (APIs, apiType) => {
+  Meteor.startup(function() {
+    import { Api } from '/imports/api/api/api_collection';
+    Api.remove({type:apiType});
+    Object.keys(APIs).forEach(function(apiName){
+        Api.insert(APIs[apiName]);
+    });
+  });
+};
 

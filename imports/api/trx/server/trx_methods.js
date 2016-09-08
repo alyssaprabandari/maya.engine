@@ -8,7 +8,7 @@ import { Org } from '/imports/api/org/org_collection.js';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 import { constructQuery } from '/imports/modules/utils';
 

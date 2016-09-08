@@ -5,43 +5,17 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _ImageSchema, _RefSchema, _OwnerSchema, _PageSchema, _LayoutSchema, _ApiSchema } from '/imports/api/general_schemas';
 
-import { Log } from '/imports/api/log/log_collection';
-
 class TenantCollection extends Mongo.Collection {
   insert(doc, callback) {
-    const result = super.insert(doc, callback);    
-    Log.insert({
-      refName			: 'Tenant',
-      refId 			: result,
-      refDoc 			: JSON.stringify(doc),
-      type 				: 'insert',
-      result 			: result
-    });
+    const result = super.insert(doc, callback);
     return result;
-  }
-  
+  }  
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-		Log.insert({
-      refName			: 'Tenant',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(modifier),
-      type 				: 'update',
-      result 			: result
-    });
     return result;
   }
-  
   remove(selector) {
-    const refDoc = Tenant.findOne(selector);
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'Tenant',
-      refId 			: selector,
-      refDoc      : JSON.stringify(refDoc),
-      type 				: 'remove',
-      result 			: result
-    });
     return result;
   }
 };
@@ -97,7 +71,7 @@ Tenant.schema = new SimpleSchema({
     type: String,
   },
 
-  apis: {
+  APIs: {
     type: [ _ApiSchema ],
   },
 

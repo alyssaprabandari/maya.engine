@@ -8,7 +8,7 @@ const handleInsertDocument = (event) => {
   const title = target.value.trim();
 
   if (title !== '' && event.keyCode === 13) {
-    Meteor.call('documents.insert',{
+    Meteor.call('insertDocument',{
       title,
     }, (error) => {
       if (error) {

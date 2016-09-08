@@ -7,7 +7,7 @@ import { Member } from '/imports/api/member/member_collection.js';
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './acctTrx_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 // now all publications for admistrators
 Meteor.publishComposite(apiName.admAcctTrxDetail, function admAcctTrxDetail(acctTrxId) {

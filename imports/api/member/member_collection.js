@@ -5,44 +5,20 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _ImageSchema, _RefSchema, _OrgSchema, _TenantSchema } from '/imports/api/general_schemas';
 
-import { Log } from '/imports/api/log/log_collection.js';
-
 import { Acct } from '../acct/acct_collection'
 import { Org } from '../org/org_collection'
 
 class MemberCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);
-    Log.insert({
-      refName			: 'Member',
-      refId 			: result,
-      refDoc 			: JSON.stringify(doc),
-      type 				: 'insert',
-      result 			: result
-    });
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-		Log.insert({
-      refName			: 'Member',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(modifier),
-      type 				: 'update',
-      result 			: result
-    });
     return result;
   }
   remove(selector) {
-  	const refDoc = Member.findOne(selector);
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'Member',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(refDoc),
-      type 				: 'remove',
-      result 			: result
-    });
     return result;
 	}
 };

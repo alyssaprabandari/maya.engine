@@ -7,41 +7,17 @@ import { _RefSchema, _TenantSchema, _OwnerSchema } from '/imports/api/general_sc
 
 import { AcctMovement } from '/imports/api/acctMovement/acctMovement_collection.js';
 
-import { Log } from '/imports/api/log/log_collection';
-
 class AcctCollection extends Mongo.Collection {
   insert(doc, callback) {
-    const result = super.insert(doc, callback);    
-    Log.insert({
-      refName			: 'Acct',
-      refId 			: result,
-      refDoc 			: JSON.stringify(doc),
-      type 				: 'insert',
-      result 			: result
-    });
+    const result = super.insert(doc, callback);
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-		Log.insert({
-      refName			: 'Acct',
-      refId 			: selector,
-      refDoc 			: JSON.stringify(modifier),
-      type 				: 'update',
-      result 			: result
-    });
     return result;
   }
   remove(selector) {
-    const refDoc = Acct.findOne(selector);
     const result = super.remove(selector);
-    Log.insert({
-      refName			: 'Acct',
-      refId 			: selector,
-      refDoc      : JSON.stringify(refDoc),
-      type 				: 'remove',
-      result 			: result
-    });
     return result;
   }
 };

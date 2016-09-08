@@ -11,7 +11,7 @@ import { Org } from '/imports/api/org/org_collection.js';
 import { constructQuery } from '/imports/modules/utils';
 import { apiName, searchFieldNames } from './acct_methods';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 //all publications for own account
 Meteor.publish(apiName.myAcctList, function myAcctList(){

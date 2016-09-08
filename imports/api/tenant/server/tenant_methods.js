@@ -10,7 +10,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 import { constructQuery } from '/imports/modules/utils';
 
-import { checkOwner, getCurrentUserRootDomain } from '/imports/api/general/server/general_functions';
+import { checkOwner, getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
 
 export const apiName = {
   getTenantInfo        : 'getTenantInfo',
