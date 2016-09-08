@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Alert } from 'react-bootstrap';
+import { Grid, Table, Alert } from 'react-bootstrap';
 
 import { DocumentTableItem } from './DocumentTableItem.js';
 
@@ -7,7 +7,7 @@ export const DocumentTable = ({ documents }) => {
 	return (
 	  documents.length > 0
 	  ? 
-		  <div>
+		  <Grid>
 		  	<p>documents.length:{ documents.length }</p>
 			  <Table striped bordered condensed hover responsive>
 					<thead>
@@ -21,7 +21,7 @@ export const DocumentTable = ({ documents }) => {
 						))}
 					</tbody>
 			  </Table>
-		  </div> 
+		  </Grid> 
 	  :
 		  <Alert bsStyle="warning">No Data found...</Alert>
 	);
