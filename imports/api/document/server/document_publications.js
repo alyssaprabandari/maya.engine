@@ -12,6 +12,12 @@ const APIs = {
     type          : apiType,
     status        : 'Active',
   },
+  detailDocument: {
+    name          : 'detailDocument',
+    description   : 'Detail of a Document',
+    type          : apiType,
+    status        : 'Active',
+  },
 };
 
 initAPIsToDB(APIs, apiType);
@@ -23,6 +29,30 @@ Meteor.publishComposite(APIs.listDocument.name, function(){
     return {
       find() {
         const query = {
+        };
+        const options = {
+        };
+        
+        return Document.find(query, options);
+      },
+
+    };
+  }catch(exception){
+    console.log('EXCEPTION - '+apiName+' - '+ apiType+' - userId: '+this.userId, exception);
+    return this.ready();
+  }
+});
+
+Meteor.publishComposite(APIs.detailDocument.name, function(documentId){
+  const apiName = APIs.detailDocument.name;
+  try{
+    check(documentId, Match._id);
+    isUserHasAccess(this.userId, this.connection, apiName, apiType);
+    
+    return {
+      find() {
+        const query = {
+          _id: documentId,
         };
         const options = {
         };

@@ -35,6 +35,14 @@ tenant
             "type" : "Document.Publication"
         }, 
         {
+            "name" : "detailDocument",
+            "roles" : [ 
+                "Internal.Ops", 
+                "Admin"
+            ],
+            "type" : "Document.Publication"
+        },
+        {
             "name" : "insertDocument",
             "roles" : [ 
                 "Admin"
@@ -44,7 +52,7 @@ tenant
         {
             "name" : "updateDocument",
             "roles" : [ 
-                "Admin",
+                "Admin", 
                 "Internal.Ops"
             ],
             "type" : "Document.Method"
@@ -117,22 +125,35 @@ tenant
         {
             "title" : "Halaman Kedua",
             "path" : "/kedua",
-            "roles" : [],
-            "widgets" : [ 
-                "AppNavigation", 
-                "Welcome", 
-                "Documents"
-            ],
-            "menuNr" : 2
-        }, 
-        {
-            "title" : "Frequently Asked Questions",
-            "path" : "/faq",
             "roles" : [ 
                 "Member.Free", 
                 "Internal.Ops", 
                 "Admin"
             ],
+            "widgets" : [ 
+                "AppNavigation", 
+                "Welcome", 
+                "DocumentTable"
+            ],
+            "menuNr" : 2
+        }, 
+        {
+            "title" : "Document Detail",
+            "path" : "/document/:docId/detail",
+            "roles" : [ 
+                "Member.Free", 
+                "Internal.Ops", 
+                "Admin"
+            ],
+            "widgets" : [ 
+                "AppNavigation", 
+                "DocumentDetail"
+            ]
+        }, 
+        {
+            "title" : "Frequently Asked Questions",
+            "path" : "/faq",
+            "roles" : [],
             "widgets" : [ 
                 "AppNavigation", 
                 "Documents", 
@@ -166,4 +187,5 @@ tenant
     "type" : "maya.engine",
     "status" : "Active"
 }
+
 

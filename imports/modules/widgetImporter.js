@@ -20,12 +20,18 @@ export const widgetImporter = (widget) => {
 					import { ResetPassword } from '/imports/ui/widgets/Bootstrap/ResetPassword/ResetPassword'; return ResetPassword;
 				case 'Signup': 
 					import { Signup } from '/imports/ui/widgets/Bootstrap/Signup/Signup'; return Signup;
+				case 'Documents': 
+					import { Documents } from '/imports/ui/widgets/Bootstrap/Documents/Documents'; return Documents;
 				case 'Welcome': 
 					import Welcome from '/imports/ui/widgets/Bootstrap/Welcome/Welcome'; return Welcome;
 				case 'HeadlineCarousel': 
 					import HeadlineCarousel from '/imports/ui/widgets/Bootstrap/HeadlineCarousel/HeadlineCarousel'; return HeadlineCarousel;
-				case 'Documents': 
-					import { Documents } from '/imports/ui/widgets/Bootstrap/Documents/Documents'; return Documents;
+				
+				case 'DocumentTable': 
+					import DocumentTable from '/imports/ui/widgets/Bootstrap/DocumentTable/DocumentTableContainer'; return DocumentTable;
+				case 'DocumentDetail': 
+					import DocumentDetail from '/imports/ui/widgets/Bootstrap/DocumentDetail/DocumentDetailContainer'; return DocumentDetail;
+				
 				default: 
 					import { NotFound } from '/imports/ui/widgets/Bootstrap/NotFound/NotFound'; return NotFound;
 			};
