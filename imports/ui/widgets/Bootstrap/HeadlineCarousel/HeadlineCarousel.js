@@ -5,7 +5,7 @@ import React from 'react';
 
 import { Loading } from '/imports/ui/widgets/Bootstrap/Loading/Loading.js';
 
-import { Headline } from '/imports/api/headline/headline_collection';
+import { Info } from '/imports/api/info/info_collection';
 
 import { Carousel } from 'react-bootstrap';
 
@@ -30,9 +30,9 @@ const HeadlineCarousel = ({ headlines }) => {
 }
 
 const composer = (params, onData) => {
-	const subscription = Meteor.subscribe('headline.list');
+	const subscription = Meteor.subscribe('listHeadline');
 	if (subscription.ready()){
-		const headlines = Headline.find().fetch();
+		const headlines = Info.find().fetch();
 		onData(null, { headlines: headlines });
 	}
 };

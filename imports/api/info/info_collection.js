@@ -3,9 +3,9 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _RefSchema } from '/imports/api/general_schemas';
+import { _OwnerSchema, _RefSchema } from '/imports/api/general_schemas';
 
-class HeadlineCollection extends Mongo.Collection {
+class InfoCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);
     return result;
@@ -20,31 +20,37 @@ class HeadlineCollection extends Mongo.Collection {
 	}
 };
 
-export const Headline = new HeadlineCollection('headline');
+export const Info = new InfoCollection('info');
 
 // Deny all client-side updates since we will be using methods to manage this collection
-Headline.deny({
+Info.deny({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
 });
 
-Headline.schema = new SimpleSchema({
+Info.schema = new SimpleSchema({
 	title: {
 		type: String,
-		label: 'Headline Title',
+		label: 'Info Title',
 	},
   description: {
     type: String,
     label: 'Description',
   },
+
+  sequenceNr: {
+    type: Number,
+    defaultValue: 0
+  },
+
   imgUrl: {
     type: SimpleSchema.RegEx.Url,
   },
-  
+
   type: {
     type: String,
-    allowedValues   : ["Announcement","Article","Product"],
+    allowedValues   : [ "Headline", "Headline.Article", "Headline.Product", "FAQ" ], 
   },
   status: {
     type: String,
@@ -54,14 +60,11 @@ Headline.schema = new SimpleSchema({
   tenantId: {
     type: SimpleSchema.RegEx.Id,
   },
-  ownerId: {
-    type: SimpleSchema.RegEx.Id,
-  },
-  ownerType: {
-    type: String,
-    allowedValues   : ["Member", "Org"],
-  },
 
+  owners: {
+    type: [ _OwnerSchema ],
+    optional: true,
+  },
   refs: {
     type: [ _RefSchema ],
     optional: true
@@ -84,28 +87,20 @@ Headline.schema = new SimpleSchema({
 
 });
 
-Headline.attachSchema(Headline.schema);
+Info.attachSchema(Info.schema);
 
-Headline.publicFields = {
+Info.publicFields = {
   title         : 1,  
   description 	: 1,
+  sequenceNr    : 1,
+
   imgUrl        : 1,
   type          : 1,
-  status        : 1,
+
   refs          : 1,
+  timestamp     : 1,
 };
 
-Headline.helpers({
-  getTenant() {
-    return Tenant.findOne(this.tenantId);
-  },
-  getOwner() {
-    if(this.ownerType === 'Member')
-      return Member.findOne(this.ownerId);
-    if(this.ownerType === 'Org')
-      return Org.findOne(this.ownerId);
-  },
-  getLogs(){
-    return Log.find({refName:'Headline',refId:this._id},{sort: {timestamp: -1}});
-  },
+Info.helpers({
+
 });

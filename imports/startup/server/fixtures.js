@@ -5,11 +5,12 @@ import { Accounts } from 'meteor/accounts-base';
 
 import { Tenant } from '/imports/api/tenant/tenant_collection';
 import { Member } from '/imports/api/member/member_collection';
+import { Info } from '/imports/api/info/info_collection';
 
 const tenants = [{
 	"domain" 	: "localhost",
 	"name" 		: "Localhost",
-	"csEmail" : "info@localhost",
+	"email" 	: "info@localhost",
 	"layout" : {
 	  "framework" : "Bootstrap",
 	  "appWidget" : "App",
@@ -60,6 +61,16 @@ const tenants = [{
 	      "Admin"
 	    ],
 	    "type" 	: "Document.Method"
+	  }, 
+	  {
+	    "name" 	: "listHeadline",
+	    "roles" : [],
+	    "type" 	: "Info.Publication"
+	  }, 
+	  {
+	    "name" 	: "listFaq",
+	    "roles" : [],
+	    "type" 	: "Info.Publication"
 	  }
 	],
 	"index" : {
@@ -114,8 +125,7 @@ const tenants = [{
 	    "path" 		: "/welcome",
 	    "widgets" : [ 
 	      "AppNavigation", 
-	      "Welcome", 
-	      "Welcome"
+	      "ProductCard"
 	    ],
 	    "menuNr" 	: 1
 	  }, 
@@ -148,22 +158,20 @@ const tenants = [{
 	    ]
 	  }, 
 	  {
-	    "title" 	: "Frequently Asked Questions",
+	    "title" 	: "FAQ",
 	    "path" 		: "/faq",
 	    "roles" 	: [],
 	    "widgets" : [ 
 	      "AppNavigation", 
-	      "Documents", 
-	      "Welcome"
+	      "FAQ"
 	    ],
 	    "menuNr" 	: 3
 	  }, 
 	  {
-	    "title" 	: "Ops Tools",
+	    "title" 	: "Ops",
 	    "path" 		: "/ops",
 	    "roles" 	: [ 
-	      "Internal.Ops", 
-	      "Admin"
+	      "Internal.Ops"
 	    ],
 	    "widgets" : [ 
 	      "AppNavigation", 
@@ -178,15 +186,15 @@ const tenants = [{
 	"type" 									: "maya.engine",
 	"status" 								: "Active",
 },{
-	"domain" 	: "melonjaya.com",
-	"name" 		: "Melon Jaya",
-	"csEmail" : "info@melonjaya.com",
+	"domain" 	: "ecommerce.maya",
+	"name" 		: "Maya eCommerce",
+	"email" 	: "info@ecommerce.maya",
 	"layout" : {
 	  "framework" : "Bootstrap",
 	  "appWidget" : "App",
-	  "cssUrl" 		: ""
+	  "cssUrl" 		: "http://ecommerce.maya:3000/css/ecommerce.maya.css"
 	},
-	"description" : "The Sweetest Melon in the World",
+	"description" : "eCommerce Example using Maya Engine",
 	"roles" : [ 
 	  "Member.Free", 
 	  "Internal.Ops", 
@@ -231,10 +239,20 @@ const tenants = [{
 	      "Admin"
 	    ],
 	    "type" 	: "Document.Method"
+	  }, 
+	  {
+	    "name" 	: "listHeadline",
+	    "roles" : [],
+	    "type" 	: "Info.Publication"
+	  }, 
+	  {
+	    "name" 	: "listFaq",
+	    "roles" : [],
+	    "type" 	: "Info.Publication"
 	  }
 	],
 	"index" : {
-	  "title" 	: "Home Page of Melon Jaya",
+	  "title" 	: "Home Page of  eCommerce Example using Maya Engine",
 	  "path" 		: "/",
 	  "roles" 	: [],
 	  "widgets" : [ 
@@ -285,8 +303,7 @@ const tenants = [{
 	    "path" 		: "/welcome",
 	    "widgets" : [ 
 	      "AppNavigation", 
-	      "Welcome", 
-	      "Welcome"
+	      "ProductCard"
 	    ],
 	    "menuNr" 	: 1
 	  }, 
@@ -319,26 +336,23 @@ const tenants = [{
 	    ]
 	  }, 
 	  {
-	    "title" 	: "Frequently Asked Questions",
+	    "title" 	: "FAQ",
 	    "path" 		: "/faq",
 	    "roles" 	: [],
 	    "widgets" : [ 
 	      "AppNavigation", 
-	      "Documents", 
-	      "Welcome"
+	      "FAQ"
 	    ],
 	    "menuNr" 	: 3
 	  }, 
 	  {
-	    "title" 	: "Ops Tools",
+	    "title" 	: "Ops",
 	    "path" 		: "/ops",
 	    "roles" 	: [ 
-	      "Internal.Ops", 
-	      "Admin"
+	      "Internal.Ops"
 	    ],
 	    "widgets" : [ 
 	      "AppNavigation", 
-	      "Documents", 
 	      "Documents"
 	    ],
 	    "menuNr" 	: 4
@@ -375,49 +389,71 @@ const users = [{
   roles: ['Internal.Ops'],
   domain: 'localhost'
 },{
-  email: 'first.user@localhost',
+  email: 'first.member@localhost',
   password: 'password',
   profile: {
-    fullname: 'Free Member Localhost',
+    fullname: 'First Free Member Localhost',
   },
   roles: ['Member.Free'],
   domain: 'localhost'
 },{
-  email: 'admin@melonjaya.com',
+  email: 'admin@ecommerce.maya',
   password: 'password',
   profile: {
-    fullname: 'Admin Melonjaya',
+    fullname: 'Admin Maya eCommerce',
   },
   roles: ['Member.Free','Internal.Ops','Admin'],
-  domain: 'melonjaya.com'
+  domain: 'ecommerce.maya'
 },{
-  email: 'admin2@melonjaya.com',
+  email: 'admin2@ecommerce.maya',
   password: 'password',
   profile: {
     fullname: '2nd Admin Melonjaya',
   },
   roles: ['Admin'],
-  domain: 'melonjaya.com'
+  domain: 'ecommerce.maya'
 },{
-  email: 'internal.ops@melonjaya.com',
+  email: 'internal.ops@ecommerce.maya',
   password: 'password',
   profile: {
     fullname: 'Melonjaya Internal Ops',
   },
   roles: ['Internal.Ops'],
-  domain: 'melonjaya.com'
+  domain: 'ecommerce.maya'
 },{
-  email: 'first.user@melonjaya.com',
+  email: 'first.member@ecommerce.maya',
   password: 'password',
   profile: {
-    fullname: 'Free Member Melonjaya',
+    fullname: 'First Free Member Maya eCommerce',
   },
   roles: ['Member.Free'],
-  domain: 'melonjaya.com'
+  domain: 'ecommerce.maya'
+}];
+
+const infos = [{
+	"title" 				: "Announcement Headline", 
+	"description" 	: "We are currently under Alpha-Phase", 
+	"type" 					: "Headline.Announcement",
+	"status" 				: "Active",
+},{
+	"title" 				: "Product Headline", 
+	"description" 	: "Please view the detail of the Product", 
+	"type" 					: "Headline.Product",
+	"status" 				: "Active",
+},{
+	"title" 				: "First FAQ", 
+	"description" 	: "This is the answer of the first FAQ", 
+	"type" 					: "FAQ",
+	"status" 				: "Active",
+},{
+	"title" 				: "Second FAQ", 
+	"description" 	: "Hier ist die Antwort von dem zweiten FAQ", 
+	"type" 					: "FAQ",
+	"status" 				: "Active",
 }];
 
 tenants.forEach((tenant) => {
-	console.log('****************** START fixtures checking tenant: ', tenant.domain);
+	console.log('****************** START fixtures for tenant: ', tenant.domain);
 
 	let tenantId;
 	const tenantFound = Tenant.findOne({domain:tenant.domain});
@@ -431,7 +467,6 @@ tenants.forEach((tenant) => {
   	tenantId = tenantFound._id;
   };
   
-
 	const tenantUsers = _.where(users,{domain:tenant.domain});
 	console.log('tenantUsers found in fixtures: ', tenantUsers);
 
@@ -451,9 +486,6 @@ tenants.forEach((tenant) => {
 			userId = userExists._id;
 		};
 
-    Roles.addUsersToRoles(userId, tenantUser.roles, tenantUser.domain);
-    console.log('Roles added to user: ',tenantUser.roles);
-
     if(!Member.findOne(userId)){
 	    const memberId= Member.insert({
 	    	"_id" 			: userId, 
@@ -465,7 +497,11 @@ tenants.forEach((tenant) => {
 	    		"status" 		: "Active" 
 	    	}],
 	    },{ validate: false });
-	    console.log('memberId created: ', memberId);	    	
+	    console.log('memberId created: ', memberId);	 
+  
+      Roles.addUsersToRoles(userId, tenantUser.roles, tenantUser.domain);
+	    console.log('Roles added to user: ',tenantUser.roles);
+   	
     }else{
     	console.log('Found member in DB, skipping...');
     }
@@ -480,8 +516,22 @@ tenants.forEach((tenant) => {
 	Tenant._collection.update({ _id: tenantId }, { $set:{ owners:tenantOwners } });
 	console.log('update Tenant with owners: ', tenantOwners);
 
-  console.log('****************** END fixtures checking tenant: ', tenant.domain);
+	if(Info.find().fetch().length < infos.length ){
+		console.log('now injecting info collection...');
+		infos.forEach((info) => {
+			info.tenantId = tenantId;
+			info.imgUrl 	= "http://"+tenant.domain+":3000/images/carousel.png";
+			info.owners 	= tenantOwners;
+
+			//FIXME harusnya cek type, bila Product, inject juga ke refs, tentunya kita buat data dulu di Product Collection 
+
+			const infoId = Info.insert(info,{ validate: false});
+			console.log('created infoId: ', infoId);
+		});
+	}else{
+		console.log('skipping infos creation...');
+	};
+	
+
+  console.log('****************** END fixtures for tenant: ', tenant.domain);
 });
-
-
-

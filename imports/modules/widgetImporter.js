@@ -32,6 +32,13 @@ export const widgetImporter = (widget) => {
 				case 'DocumentDetail': 
 					import DocumentDetail from '/imports/ui/widgets/Bootstrap/DocumentDetail/DocumentDetailContainer'; return DocumentDetail;
 				
+
+				case 'FAQ': 
+					import FAQ from '/imports/ui/widgets/Bootstrap/FAQ/FAQ.js'; return FAQ;
+
+				case 'ProductCard': 
+					import ProductCard from '/imports/ui/widgets/Bootstrap/ProductCard/ProductCard.js'; return ProductCard;
+				
 				default: 
 					import { NotFound } from '/imports/ui/widgets/Bootstrap/NotFound/NotFound'; return NotFound;
 			};

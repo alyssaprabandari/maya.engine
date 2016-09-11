@@ -38,18 +38,20 @@ Tenant.schema = new SimpleSchema({
     type: String,
     label: 'Name of this Tenant',
   },
-
-  cs: {
-    type: SimpleSchema.RegEx.Email
-  },
-
-  layout: {
-    type      : _LayoutSchema,
-  },
-
   description: {
     type      : String,
     label     : "Description"
+  },
+
+  email: {
+    type: SimpleSchema.RegEx.Email
+  },
+  layout: {
+    type      : _LayoutSchema,
+  },
+  images: {
+    type      : [ _ImageSchema ],
+    optional  : true
   },
 
   index: {
@@ -89,11 +91,6 @@ Tenant.schema = new SimpleSchema({
     defaultValue    : "Active"
   },
 
-  images: {
-    type      : [ _ImageSchema ],
-    optional  : true
-  },
-
   owners: {
     type: [ _OwnerSchema ],
     optional: true,
@@ -124,20 +121,21 @@ Tenant.schema = new SimpleSchema({
 Tenant.attachSchema(Tenant.schema);
 
 Tenant.publicFields = {
-  domain        : 1,
-  name 					: 1,
-  layout        : 1,
-  description 	: 1,
-  index         : 1,
-  pages         : 1,
+  domain                : 1,
+  name 					        : 1,
+  description           : 1,
+
+  email                 : 1,
+  layout                : 1,
+  images                : 1,
+  
+  index                 : 1,
+  pages                 : 1,
   isPublicMenuInAuthNav : 1,
-  type          : 1,
-  status        : 1,
+  
 };
 
 Tenant.helpers({
-	getLogs(){
-    return Log.find({refName:'Tenant',refId:this._id});
-  },
+
 });
 

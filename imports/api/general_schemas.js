@@ -16,7 +16,7 @@ export const _ApiSchema = new SimpleSchema({
 export const _LayoutSchema = new SimpleSchema({
   framework: {
     type: String,
-    allowedValues: ["Bootstrap","MaterialUI"],
+    allowedValues: [ "Bootstrap", "MaterialUI" ],
   },
   appWidget: {
     type: String,

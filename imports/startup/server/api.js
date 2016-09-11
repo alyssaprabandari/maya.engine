@@ -40,6 +40,6 @@ import '../../api/product/server/product_methods.js';
 import '../../api/article/server/article_publications.js';
 import '../../api/article/server/article_methods.js';
 
-import '../../api/headline/server/headline_publications.js';
-import '../../api/headline/server/headline_methods.js';
+import '../../api/info/server/info_publications.js';
+import '../../api/info/server/info_methods.js';
 
