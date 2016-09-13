@@ -29,7 +29,7 @@ const signUp = () => {
       component.setState({isLoading:false});
       Bert.alert(error.reason, 'danger');
     } else {
-      Meteor.call('member.signup', function(error,result){
+      Meteor.call('memberSignup', function(error,result){
         if(error){
           component.setState({isLoading:false});
           Meteor.logout();

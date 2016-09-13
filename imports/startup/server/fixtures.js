@@ -26,6 +26,16 @@ if(process.env.NODE_ENV === 'development'){
 		"standardRole" : "Member.Free",
 		"APIs" : [ 
 		  {
+		    "name" 	: "memberSignup",
+		    "roles" : [],
+		    "type" 	: "Member.Method"
+		  },
+		  {
+		    "name" 	: "memberLogin",
+		    "roles" : [],
+		    "type" 	: "Member.Method"
+		  },
+		  {
 		    "name" 	: "listDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
@@ -204,6 +214,16 @@ if(process.env.NODE_ENV === 'development'){
 		"standardRole" : "Member.Free",
 		"APIs" : [ 
 		  {
+		    "name" 	: "memberSignup",
+		    "roles" : [],
+		    "type" 	: "Member.Method"
+		  },
+		  {
+		    "name" 	: "memberLogin",
+		    "roles" : [],
+		    "type" 	: "Member.Method"
+		  },
+		  {
 		    "name" 	: "listDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
@@ -381,6 +401,16 @@ if(process.env.NODE_ENV === 'development'){
 		],
 		"standardRole" : "Member.Free",
 		"APIs" : [ 
+		  {
+		    "name" 	: "memberSignup",
+		    "roles" : [],
+		    "type" 	: "Member.Method"
+		  },
+		  {
+		    "name" 	: "memberLogin",
+		    "roles" : [],
+		    "type" 	: "Member.Method"
+		  },
 		  {
 		    "name" 	: "listDocument",
 		    "roles" : [ 

@@ -70,6 +70,9 @@ export const _TenantSchema = new SimpleSchema({
     allowedValues   : ['Active', 'Suspended', 'Out'],
     defaultValue    : 'Active'
   },
+  createdAt: {
+    type: Date
+  },
 });
 
 export const _OrgSchema = new SimpleSchema({

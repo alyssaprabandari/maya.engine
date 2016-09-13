@@ -17,16 +17,24 @@ const login = () => {
 
   Meteor.loginWithPassword(email, password, (error) => {
     if (error) {
+    	component.setState({isLoading:false});
       Bert.alert(error.reason, 'warning');
     } else {
-      Bert.alert('Logged in!', 'success');
-
-      const { location } = component.props;
-      if (location.state && location.state.nextPathname) {
-        browserHistory.push(location.state.nextPathname);
-      } else {
-        browserHistory.push('/');
-      }
+      Meteor.call('memberLogin', function(error,result){
+        if(error){
+          component.setState({isLoading:false});
+          Meteor.logout();
+          Bert.alert(error.message+', please contact helpdesk of '+Meteor.settings.public.tenant,'danger');
+        }else{
+          Bert.alert('Logged in!', 'success');
+          const { location } = component.props;
+          if (location.state && location.state.nextPathname) {
+            browserHistory.push(location.state.nextPathname);
+          } else {
+            browserHistory.push('/');
+          };
+        };
+      });
     }
   });
 };
