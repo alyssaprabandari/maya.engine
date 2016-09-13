@@ -1,130 +1,68 @@
 import { Meteor } from 'meteor/meteor';
-
-import { Product } from '/imports/api/product/product_collection.js';
-
-import { Member } from '/imports/api/member/member_collection.js';
-import { Org } from '/imports/api/org/org_collection.js';
-
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { rateLimit } from '/imports/modules/rate-limit.js';
 
-import { constructQuery } from '/imports/modules/utils';
+import { initAPIsToDB, isUserHasAccess } from '/imports/api/general/server/general_server_functions';
 
-import { getCurrentUserRootDomain } from '/imports/api/general/server/general_server_functions';
+import { Product } from '/imports/api/product/product_collection';
+import { Member } from '/imports/api/member/member_collection';
+import { Org } from '/imports/api/org/org_collection';
 
-export const apiName = {
-  myProductList         : 'my.product.list',
-  myProductDetail       : 'my.product.detail',
-  admProductList        : 'adm.product.list',
-  admProductListCount   : 'adm.product.list.count',
-  admProductDetail      : 'adm.product.detail',
-  admProductFormInsert  : 'adm.product.form.insert',
-  admProductFormUpdate  : 'adm.product.form.update',
+const apiType = 'Product.Method';
+const APIs = {
+  insertProduct: {
+    name: 'insertProduct',
+    description: 'Insert new Product',
+    type: apiType,
+    status: 'Active',
+  },
+  updateProduct: {
+    name: 'updateProduct',
+    description: 'Update existing Product',
+    type: apiType,
+    status: 'Active',
+  },
+  removeProduct: {
+    name: 'removeProduct',
+    description: 'Remove existing Product',
+    type: apiType,
+    status: 'Active',
+  },
 };
 
-export const searchFieldNames = ['name','coaNr','ownerId','ownerType','unitPrice','currency','uom','description','type','status', 'refs'];
+initAPIsToDB(APIs, apiType);
 
-export const admProductListCount = new ValidatedMethod({
-  name: apiName.admProductListCount,
-  validate: new SimpleSchema({
-    searchText: { type: String, optional: true }
-  }).validator(),
-
-  run({searchText}) {
-    try{
-      check(searchText, Match.Maybe(Match.textOnly));
-
-      if(!this.userId)
-        throw new Meteor.Error(401, 'You must be logged in.');
-
-      if( !Roles.userIsInRole(this.userId,'Admin',getCurrentUserRootDomain(this.connection)) )
-        throw new Meteor.Error(444, 'Not enough Right');
-
-      const query = constructQuery(searchFieldNames,searchText);
-      return Product.find(query).count();
-
-    }catch(exception){
-      console.log('METHOD EXCEPTION - '+apiName.admProductListCount+' - userId: '+this.userId, exception);
-      throw new Meteor.Error(400,'Internal Server Exception');
-    }
-  }
-});
-
-export const admProductFormInsert = new ValidatedMethod({
-  name: apiName.admProductFormInsert,
-  validate: Product.schema.pick(['name','coaNr','ownerId','ownerType','unitPrice','currency','uom','description','type','status']).validator(),
+export const insertProduct = new ValidatedMethod({
+  name: APIs.insertProduct.name,
+  validate: Product.schema.pick(['name','unitPrice','currency','uom','description','type']).validator(),
 
   run(product) {
     try{
       // now sanity check
-      if(!this.userId)
-        throw new Meteor.Error(401, 'You must be logged in.');
-
-      if( !Roles.userIsInRole(this.userId,'Admin',getCurrentUserRootDomain(this.connection)) )
-        throw new Meteor.Error(444, 'Not enough Right');
-
-      let owner;
-      switch(product.ownerType){
-        case 'Org'  : 
-          owner = Org.findOne({_id: product.ownerId});
-          break;
-        case 'Member'   : 
-          owner = Member.findOne({_id: product.ownerId});
-          break;
-      };
-
-      if(!owner)
-        throw new Meteor.Error(449,'Owner not Found');
-
+      const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
+      product.tenantId = tenantId;
+      product.owners = [{
+        partyId     : this.userId,
+        partyType   : "Member"
+      }];
       return Product.insert(product);
 
     }catch(exception){
-      console.log('METHOD EXCEPTION - '+apiName.admProductFormInsert+' - userId: '+this.userId, exception);
+      console.log('EXCEPTION - '+APIs.insertProduct.name+' - '+apiType+' - userId: '+this.userId, exception);
       throw new Meteor.Error(400,'Internal Server Exception');
     }
   }
 });
 
-export const admProductFormUpdate = new ValidatedMethod({
-  name: apiName.admProductFormUpdate,
 
-  validate: new SimpleSchema([
-    Product.schema.pick(['name','coaNr','ownerId','ownerType','unitPrice','currency','uom','description','type','status']),
-    {
-      _id: { 
-        type: SimpleSchema.RegEx.Id,
-      },
-    }
-  ]).validator(),
-
-  run( product ) {
-    try{
-
-      if( !this.userId )
-        throw new Meteor.Error(401, 'You must be logged in.');
-      
-      if( !Roles.userIsInRole(this.userId,'Admin',getCurrentUserRootDomain(this.connection)) )
-        throw new Meteor.Error(444, 'Not enough Right');
-
-      let owner;
-      switch(product.ownerType){
-        case 'Org'  : 
-          owner = Org.findOne({_id: product.ownerId});
-          break;
-        case 'Member'   : 
-          owner = Member.findOne({_id: product.ownerId});
-          break;
-      };
-
-      if(!owner)
-        throw new Meteor.Error(449,'Owner not Found');
-
-      Product.update(product._id, { $set: product });
-
-    }catch(exception){
-      console.log('METHOD EXCEPTION - '+apiName.admProductFormUpdate+' - userId: '+this.userId, exception);
-      throw new Meteor.Error(400,'Internal Server Exception');
-    }
-  },
+rateLimit({
+  methods: [
+    insertProduct,
+    // updateProduct,
+    // removeProduct
+  ],
+  limit: 5,
+  timeRange: 1000,
 });
 

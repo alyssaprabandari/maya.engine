@@ -30,9 +30,6 @@ initAPIsToDB(APIs, apiType);
 export const memberSignup = new ValidatedMethod({
   name: APIs.memberSignup.name,
   validate: null,
-  //   validate: new SimpleSchema({
-  //   domain: { type: SimpleSchema.RegEx.WeakDomain }
-  // }).validator(),
   run() {
     let roleInserted, memberId, acctId;  
     try{
@@ -78,8 +75,10 @@ export const memberSignup = new ValidatedMethod({
         type        : 'Account.Current',
         status      : 'Active',
         tenantId    : tenant._id,
-        ownerId     : memberId, // FIXME ganti jadi ownerschema
-        ownerType   : 'Member',
+        owners      : [{
+          partyId   : memberId,
+          partyType : 'Member'
+        }]
       });
       
       return memberId;
@@ -98,9 +97,6 @@ export const memberSignup = new ValidatedMethod({
 export const memberLogin = new ValidatedMethod({
   name: APIs.memberLogin.name,
   validate: null,
-  // validate: new SimpleSchema({
-  //   domain: { type: SimpleSchema.RegEx.WeakDomain }
-  // }).validator(),
   run() {    
     let memberUpdated, roleInserted, acctId;
     try{
@@ -125,13 +121,6 @@ export const memberLogin = new ValidatedMethod({
       const currentTenant = _.findWhere(member.tenants, {'tenantId': tenant._id});
 
       if(!currentTenant){
-        // member.tenants.push({
-        //   tenantId : tenant._id, 
-        //   roles    : [ tenant.standardRole ],
-        //   status   : "Active"
-        // });
-        // memberUpdated = Member.update({_id:member._id},{$set:{tenants: member.tenants}});
-
         memberUpdated = Member.update({_id:member._id},{$push:{tenants: {
           tenantId  : tenant._id, 
           roles     : [ tenant.standardRole ],
@@ -151,8 +140,10 @@ export const memberLogin = new ValidatedMethod({
           type        : 'Account.Current',
           status      : 'Active',
           tenantId    : tenant._id,
-          ownerId     : member._id,
-          ownerType   : 'Member',
+          owners      : [{
+            partyId   : this.userId,
+            partyType : 'Member'
+          }]
         });
 
         return 'Member.New';

@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Info } from '/imports/api/info/info_collection';
-
 import { initAPIsToDB, isUserHasAccess } from '/imports/api/general/server/general_server_functions';
+
+import { Info } from '/imports/api/info/info_collection';
 
 const apiType = 'Info.Publication';
 const APIs = {
@@ -22,7 +22,7 @@ const APIs = {
 
 initAPIsToDB(APIs, apiType);
 
-Meteor.publishComposite(APIs.listHeadline.name, function listHeadline() {
+Meteor.publishComposite(APIs.listHeadline.name, function() {
   const apiName = APIs.listHeadline.name;
   try{
     const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
@@ -45,12 +45,12 @@ Meteor.publishComposite(APIs.listHeadline.name, function listHeadline() {
       },
     };
   }catch(exception){
-    console.log('EXCEPTION - '+APIs.listHeadline.name+' - userId: '+this.userId, exception);
+    console.log('EXCEPTION - '+APIs.listHeadline.name+' - '+apiType+' - userId: '+this.userId, exception);
     return this.ready();
   }
 });
 
-Meteor.publishComposite(APIs.listFaq.name, function listHeadline() {
+Meteor.publishComposite(APIs.listFaq.name, function() {
   const apiName = APIs.listFaq.name;
   try{
     const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
@@ -73,7 +73,7 @@ Meteor.publishComposite(APIs.listFaq.name, function listHeadline() {
       },
     };
   }catch(exception){
-    console.log('EXCEPTION - '+APIs.listFaq.name+' - userId: '+this.userId, exception);
+    console.log('EXCEPTION - '+APIs.listFaq.name+' - '+apiType+' - userId: '+this.userId, exception);
     return this.ready();
   }
 });

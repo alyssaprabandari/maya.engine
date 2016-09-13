@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Api } from '/imports/api/api/api_collection';
-
 import { initAPIsToDB, isUserHasAccess } from '/imports/api/general/server/general_server_functions';
+
+import { Api } from '/imports/api/api/api_collection';
 
 const apiType = 'Api.Publication';
 const APIs = {

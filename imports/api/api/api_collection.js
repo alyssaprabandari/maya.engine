@@ -47,7 +47,12 @@ Api.schema = new SimpleSchema({
 		allowedValues   : ["Draft", "Active", "Suspended"],
 	},
 
-
+  userId: {
+    type: SimpleSchema.RegEx.Id,
+    autoValue : function(){
+      return this.userId;
+    },
+  },
   timestamp: {
     type: Date,
     label: 'Latest Timestamp',

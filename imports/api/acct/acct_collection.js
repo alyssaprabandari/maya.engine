@@ -5,7 +5,7 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _RefSchema, _TenantSchema, _PartySchema } from '/imports/api/general_schemas';
 
-import { AcctMovement } from '/imports/api/acctMovement/acctMovement_collection.js';
+import { AcctMovement } from '/imports/api/acctMovement/acctMovement_collection';
 
 class AcctCollection extends Mongo.Collection {
   insert(doc, callback) {
@@ -69,14 +69,11 @@ Acct.schema = new SimpleSchema({
   tenantId: {
     type: SimpleSchema.RegEx.Id,
   },
-  ownerId: {
-    type: SimpleSchema.RegEx.Id,
-  },
-  ownerType: {
-    type: String,
-    allowedValues   : ["Member", "Org"],
-  },
 
+  owners: {
+    type: [ _PartySchema ],
+    optional: true,
+  },
 	refs: {
 		type: [ _RefSchema ],
 		optional: true
@@ -111,21 +108,9 @@ Acct.publicFields = {
 
   type 					: 1,
   status 				: 1,
-
-  ownerId       : 1,
-  ownerType     : 1,
 };
 
 Acct.helpers({
-	getTenant() {
-    return Tenant.findOne(this.tenantId);
-  },
-  getOwner() {
-    if(this.ownerType === 'Member')
-      return Member.findOne(this.ownerId);
-    if(this.ownerType === 'Org')
-      return Org.findOne(this.ownerId);
-  },
   getAcctMovements() {
     const query = {
       acctId: this._id
@@ -136,9 +121,6 @@ Acct.helpers({
       sort: {timestamp: -1}
     };
     return AcctMovement.find(query,options);
-  },
-  getLogs(){
-    return Log.find({refName:'Acct',refId:this._id});
   },
 });
 

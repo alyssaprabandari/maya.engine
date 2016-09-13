@@ -98,32 +98,5 @@ Member.publicFields = {
 };
 
 Member.helpers({
-	getTenants(){
-    let tenantIds = [];
-    if(this.tenants)
-      tenantIds = _.uniq(_.pluck(this.tenants, 'tenantId'));
-    return Tenant.find({_id: {$in: tenantIds}});
-  },
-  getOrgs(){
-    let orgIds = [];
-    if(this.orgs)
-      orgIds = _.uniq(_.pluck(this.orgs, 'orgId'));
-    return Org.find({_id: {$in: orgIds}});
-  },
-  getAccts(){
-		let orgIds = [];
-		if(this.orgs)
-			orgIds = _.uniq(_.pluck(this.orgs, 'orgId'));
 
-    //FIXME please check user right/role in the org
-    return Acct.find({
-      $or:[
-        {ownerId: this._id},
-        {ownerId: {$in: orgIds}},
-      ]
-    });
-	},
-  getLogs(){
-    return Log.find({refName:'Member',refId:this._id},{sort: {timestamp: -1}});
-  },
 });

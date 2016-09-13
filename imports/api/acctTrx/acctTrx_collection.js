@@ -7,7 +7,6 @@ import { _RefSchema } from '/imports/api/general_schemas';
 
 import { Acct } from '/imports/api/acct/acct_collection.js';
 
-
 class AcctTrxCollection extends Mongo.Collection {
   insert(doc, callback) {
     return super.insert(doc, callback);
@@ -55,19 +54,6 @@ AcctTrx.schema = new SimpleSchema({
 		type: String,
 		optional: true,
 	},
-	userId: {
-		type: SimpleSchema.RegEx.Id,
-		autoValue : function(){
-			return this.userId;
-		},
-	},
-	timestamp: {
-		type: Date,
-		label: 'Latest Timestamp',
-		autoValue : function(){
-			return new Date();
-		},
-	},
 
 	refs: {
 		type: [ _RefSchema ],
@@ -94,15 +80,15 @@ AcctTrx.schema = new SimpleSchema({
 AcctTrx.attachSchema(AcctTrx.schema);
 
 AcctTrx.publicFields = {
-  _id 					: 1,
-  senderAcctId 			: 1,
-  receiverAcctId 		: 1,
+  _id 						: 1,
+  senderAcctId 		: 1,
+  receiverAcctId 	: 1,
 
-  amount 				: 1,
+  amount 					: 1,
 
-  type 					: 1,
-  status 				: 1,
-  description 			: 1,
+  type 						: 1,
+  status 					: 1,
+  description 		: 1,
 
   timestamp 			: 1,
 };

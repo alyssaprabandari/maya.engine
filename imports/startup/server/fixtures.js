@@ -24,61 +24,52 @@ if(process.env.NODE_ENV === 'development'){
 		  "Admin"
 		],
 		"standardRole" : "Member.Free",
-		"APIs" : [ 
-		  {
+		"APIs" : [{
 		    "name" 	: "memberSignup",
 		    "roles" : [],
 		    "type" 	: "Member.Method"
-		  },
-		  {
+		  },{
 		    "name" 	: "memberLogin",
 		    "roles" : [],
 		    "type" 	: "Member.Method"
-		  },
-		  {
+		  },{
 		    "name" 	: "listDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Publication"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "detailDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Publication"
-		  },
-		  {
+		  },{
 		    "name" 	: "insertDocument",
 		    "roles" : [ 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "updateDocument",
 		    "roles" : [ 
 		      "Admin", 
 		      "Internal.Ops"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "removeDocument",
 		    "roles" : [ 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "listHeadline",
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "listFaq",
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
@@ -212,68 +203,63 @@ if(process.env.NODE_ENV === 'development'){
 		  "Admin"
 		],
 		"standardRole" : "Member.Free",
-		"APIs" : [ 
-		  {
+		"APIs" : [{
 		    "name" 	: "memberSignup",
 		    "roles" : [],
 		    "type" 	: "Member.Method"
-		  },
-		  {
+		  },{
 		    "name" 	: "memberLogin",
 		    "roles" : [],
 		    "type" 	: "Member.Method"
-		  },
-		  {
+		  },{
 		    "name" 	: "listDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Publication"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "detailDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Publication"
-		  },
-		  {
+		  },{
 		    "name" 	: "insertDocument",
 		    "roles" : [ 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "updateDocument",
 		    "roles" : [ 
 		      "Admin", 
 		      "Internal.Ops"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "removeDocument",
 		    "roles" : [ 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "listHeadline",
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "listFaq",
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
+		  },{
+		    "name" 	: "insertProduct",
+		    "roles" : ["Admin", "Internal.Ops"],
+		    "type" 	: "Product.Method"
 		  }
 		],
 		"index" : {
-		  "title" 	: "Home Page of  eCommerce Example using Maya Engine",
+		  "title" 	: "Home Page of eCommerce Example using Maya Engine",
 		  "path" 		: "/",
 		  "roles" 	: [],
 		  "widgets" : [ 
@@ -400,64 +386,59 @@ if(process.env.NODE_ENV === 'development'){
 		  "Admin"
 		],
 		"standardRole" : "Member.Free",
-		"APIs" : [ 
-		  {
+		"APIs" : [{
 		    "name" 	: "memberSignup",
 		    "roles" : [],
 		    "type" 	: "Member.Method"
-		  },
-		  {
+		  },{
 		    "name" 	: "memberLogin",
 		    "roles" : [],
 		    "type" 	: "Member.Method"
-		  },
-		  {
+		  },{
 		    "name" 	: "listDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Publication"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "detailDocument",
 		    "roles" : [ 
 		      "Internal.Ops", 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Publication"
-		  },
-		  {
+		  },{
 		    "name" 	: "insertDocument",
 		    "roles" : [ 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "updateDocument",
 		    "roles" : [ 
 		      "Admin", 
 		      "Internal.Ops"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "removeDocument",
 		    "roles" : [ 
 		      "Admin"
 		    ],
 		    "type" 	: "Document.Method"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "listHeadline",
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
-		  }, 
-		  {
+		  },{
 		    "name" 	: "listFaq",
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
+		  },{
+		    "name" 	: "insertProduct",
+		    "roles" : ["Admin", "Internal.Ops"],
+		    "type" 	: "Product.Method"
 		  }
 		],
 		"index" : {
@@ -771,11 +752,11 @@ if(process.env.NODE_ENV === 'development'){
 	    	console.log('Found member in DB, skipping...');
 	    }
 
-			if(Roles.userIsInRole(userId, 'Admin', tenantUser.domain))
-				tenantOwners.push({
-					"partyId" 	: userId,
-					"partyType" : "Member"
-				});
+			// if(Roles.userIsInRole(userId, 'Admin', tenantUser.domain))
+			// 	tenantOwners.push({
+			// 		"partyId" 	: userId,
+			// 		"partyType" : "Member"
+			// 	});
 		});
 
 		Tenant._collection.update({ _id: tenantId }, { $set:{ owners:tenantOwners } });

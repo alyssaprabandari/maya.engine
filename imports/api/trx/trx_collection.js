@@ -3,6 +3,8 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
+import { _RefSchema, _PartySchema } from '/imports/api/general_schemas';
+
 class TrxCollection extends Mongo.Collection {
 	insert(doc, callback) {
     const result = super.insert(doc, callback);
@@ -27,40 +29,6 @@ Trx.deny({
   remove() { return true; },
 });
 
-const _RefSchema = new SimpleSchema({
-	refId: {
-		type: String,
-	},
-	refType: {
-		type: String,
-	},
-	description: {
-		type: String,
-	},
-});
-
-const _LogSchema = new SimpleSchema({
-	userId:{
-		type: SimpleSchema.RegEx.Id,
-		autoValue : function(){
-			return this.userId;
-		},
-	},
-	timestamp: {
-		type: Date,
-		label: 'Latest Timestamp',
-		autoValue : function(){
-			return new Date();
-		},
-	},
-	type:{
-		type: String,
-	},
-	doc: {
-		type: Object,
-		blackbox: true,
-	},
-});
 
 const _TrxItemSchema = new SimpleSchema({
 	trxItemNr:{
@@ -125,12 +93,12 @@ Trx.schema = new SimpleSchema({
 		label: 'Custom Numbering of Transaction, if needed',
 		optional: true,
 	},
-	ownerId: {
-		type: SimpleSchema.RegEx.Id,
-	},
-	ownerType: {
-		type: String, // Member or Org
-	},
+	
+  owners: {
+    type: [ _PartySchema ],
+    optional: true,
+  },
+	
 	trxItems: {
 		type: [ _TrxItemSchema ],
 		label: 'Transaction Items',
@@ -161,9 +129,6 @@ Trx.schema = new SimpleSchema({
 	refs: {
 		type: [ _RefSchema ],
 		optional: true
-	},
-	logs: {
-		type: [ _LogSchema ],
 	},
 
 	userId: {
@@ -197,12 +162,7 @@ Trx.publicFields = {
 };
 
 Trx.helpers({
-	owner() {
-		if(this.ownerType === 'Member')
-			return Member.findOne(this.ownerId);
-		if(this.ownerType === 'Org')
-			return Org.findOne(this.ownerId);
-	},
+
 });
 
 

@@ -68,6 +68,10 @@ Product.schema = new SimpleSchema({
     optional  : true
   },
 
+  sequenceNr: {
+    type: Number,
+    defaultValue: 0
+  },
   type: {
     type: String,
     allowedValues   : ["Physical", "Virtual", "Subscription", "Crowdfunding"], // adjust with business process
@@ -185,6 +189,7 @@ Product.publicFields = {
   images        : 1,
   description   : 1,
 
+  sequenceNr    : 1,
   type          : 1,
   status        : 1,
 };

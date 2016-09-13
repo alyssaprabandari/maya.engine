@@ -72,13 +72,6 @@ AcctMovement.schema = new SimpleSchema({
     optional: true,
   },
 
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-  },
-  timestamp: {
-    type: Date,
-  },
-
 	refs: {
 		type: [ _RefSchema ],
 		optional: true
@@ -117,4 +110,7 @@ AcctMovement.publicFields = {
 
   timestamp         : 1,
 };
+
+AcctMovement.helpers({
+});
 

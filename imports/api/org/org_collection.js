@@ -99,13 +99,5 @@ Org.publicFields = {
 };
 
 Org.helpers({
-  getTenant(){
-    return Tenant.findOne({'_id': this.tenantId});
-  },
-	// members(){
-	// 	return Member.find({'orgIds.orgId': this._id});
-	// },
-	// accts(){
-	// 	return Acct.find({ownerId: this._id});
-	// }
+
 });

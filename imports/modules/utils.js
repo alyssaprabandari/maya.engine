@@ -9,22 +9,6 @@ export const toggleNav = () => {
 
 export const handleLogout = () => Meteor.logout(() => browserHistory.push('/'));
 
-export const constructQuery = (searchFieldNames, searchText) => {
-  let query = {};
-  
-  if(searchText && searchFieldNames){
-    let mongoDbArr = [];
-    searchFieldNames.map(function(fieldName) {
-      let jsonField = {};
-      jsonField[fieldName] = { $regex : searchText, $options:"i" };
-      mongoDbArr.push(jsonField);
-    });
-    query = { $or: mongoDbArr };
-  };
-
-  return query;
-};
-
 export const resetInputValue = (component) => {
 	ReactDOM.findDOMNode(component).blur()
 	ReactDOM.findDOMNode(component).value= '';

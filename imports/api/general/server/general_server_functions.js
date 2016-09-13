@@ -73,8 +73,24 @@ export const initAPIsToDB = (APIs, apiType) => {
     import { Api } from '/imports/api/api/api_collection';
     Api.remove({type:apiType});
     Object.keys(APIs).forEach(function(apiName){
-        Api.insert(APIs[apiName]);
+        Api.insert(APIs[apiName],{validate:false});
     });
   });
+};
+
+export const constructSearchQuery = (searchFieldNames, searchText) => {
+  let query = {};
+  
+  if(searchText && searchFieldNames){
+    let mongoDbArr = [];
+    searchFieldNames.map(function(fieldName) {
+      let jsonField = {};
+      jsonField[fieldName] = { $regex : searchText, $options:"i" };
+      mongoDbArr.push(jsonField);
+    });
+    query = { $or: mongoDbArr };
+  };
+
+  return query;
 };
 

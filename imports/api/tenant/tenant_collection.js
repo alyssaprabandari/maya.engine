@@ -91,10 +91,10 @@ Tenant.schema = new SimpleSchema({
     defaultValue    : "Active"
   },
 
-  owners: {
-    type: [ _PartySchema ],
-    optional: true,
-  },
+  // owners: {
+  //   type: [ _PartySchema ],
+  //   optional: true,
+  // },
   
   refs: {
     type: [ _RefSchema ],
