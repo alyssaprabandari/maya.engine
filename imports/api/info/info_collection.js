@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _OwnerSchema, _RefSchema } from '/imports/api/general_schemas';
+import { _PartySchema, _RefSchema } from '/imports/api/general_schemas';
 
 class InfoCollection extends Mongo.Collection {
   insert(doc, callback) {
@@ -62,7 +62,7 @@ Info.schema = new SimpleSchema({
   },
 
   owners: {
-    type: [ _OwnerSchema ],
+    type: [ _PartySchema ],
     optional: true,
   },
   refs: {

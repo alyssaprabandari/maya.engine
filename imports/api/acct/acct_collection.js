@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _RefSchema, _TenantSchema, _OwnerSchema } from '/imports/api/general_schemas';
+import { _RefSchema, _TenantSchema, _PartySchema } from '/imports/api/general_schemas';
 
 import { AcctMovement } from '/imports/api/acctMovement/acctMovement_collection.js';
 

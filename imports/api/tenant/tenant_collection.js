@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _RefSchema, _OwnerSchema, _PageSchema, _LayoutSchema, _ApiSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _RefSchema, _PartySchema, _PageSchema, _LayoutSchema, _ApiSchema } from '/imports/api/general_schemas';
 
 class TenantCollection extends Mongo.Collection {
   insert(doc, callback) {
@@ -83,7 +83,7 @@ Tenant.schema = new SimpleSchema({
   },
   
   type: {
-    type: String, // e.g. ecommerce, crowdfunding, etc
+    type: String, // e.g. eCommerce, crowdfunding, etc
   },
   status: {
     type: String,
@@ -92,7 +92,7 @@ Tenant.schema = new SimpleSchema({
   },
 
   owners: {
-    type: [ _OwnerSchema ],
+    type: [ _PartySchema ],
     optional: true,
   },
   

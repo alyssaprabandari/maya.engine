@@ -47,11 +47,11 @@ export const _PageSchema = new SimpleSchema({
   }
 });
 
-export const _OwnerSchema = new SimpleSchema({
-  ownerId: {
+export const _PartySchema = new SimpleSchema({
+  partyId: {
     type: SimpleSchema.RegEx.Id,
   },
-  ownerType: {
+  partyType: {
     type: String,
     allowedValues   : ["Member", "Org"],
     defaultValue    : "Member"
@@ -107,42 +107,3 @@ export const _RefSchema = new SimpleSchema({
     optional: true,
 	},
 });
-
-
-// const _PartySchema = new SimpleSchema({
-//   userId: {
-//     type: SimpleSchema.RegEx.Id,
-//   },
-//   acctId: {
-//     type: SimpleSchema.RegEx.Id,
-//   },
-//   saldoBefore: {
-//     type: Number,
-//   },
-//   saldoAfter: {
-//     type: Number,
-//   },
-// });
-
-// export const _LogSchema = new SimpleSchema({
-//   userId:{
-//     type: SimpleSchema.RegEx.Id,
-//     autoValue : function(){
-//       return this.userId;
-//     },
-//   },
-//   timestamp: {
-//     type: Date,
-//     label: 'Latest Timestamp',
-//     autoValue : function(){
-//       return new Date();
-//     },
-//   },
-//   type:{
-//     type: String,
-//   },
-//   doc: {
-//     type: Object,
-//     blackbox: true,
-//   },
-// });

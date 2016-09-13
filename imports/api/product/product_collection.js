@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _RefSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _PartySchema, _RefSchema } from '/imports/api/general_schemas';
 
 import { Member } from '/imports/api/member/member_collection';
 import { Org } from '/imports/api/org/org_collection';
@@ -51,7 +51,7 @@ Product.schema = new SimpleSchema({
   },
   currency: {
     type: String,
-    allowedValues   : ["IDR", "USD"],
+    allowedValues   : ["IDR", "USD", "EUR"],
     defaultValue    : "IDR"
   },
   uom: {
@@ -78,6 +78,10 @@ Product.schema = new SimpleSchema({
     defaultValue    : "Draft"
   },
 
+  owners: {
+    type: [ _PartySchema ],
+    optional: true,
+  },
   refs: {
     type: [ _RefSchema ],
     optional: true
@@ -97,10 +101,78 @@ Product.schema = new SimpleSchema({
     },
   },
 
-
 });
 
+const _SupporterSchema = new SimpleSchema({
+  party: {
+    type: _PartySchema,
+  },
+  acctId: {
+    type: SimpleSchema.RegEx.Id,
+  },
+  fundAmount: {
+    type: Number,
+    decimal: true,
+  },
+  anonymous: {
+    type: Boolean,
+    defaultValue: false
+  },
+  timestamp: {
+    type: Date,
+    autoValue : function(){
+      return new Date();
+    },
+  },
+});
+
+
+const _CrowdfundingSchema = new SimpleSchema({
+  recipient: {
+    type: _PartySchema
+  },
+  recipientAcctId: {
+    type: SimpleSchema.RegEx.Id
+  },
+  supporters : {
+    type: [ _SupporterSchema ],
+  },
+  fundRaised: {
+    type: Number,
+  },
+  fundTarget: {
+    type: Number,
+  },
+  fromDate: {
+    type: Date
+  },
+  thruDate: {
+    type: Date,
+    optional: true
+  },
+  categories: {
+    type: [ String ], // e.g. "Scholarship", "Education", "Medical", "Incubator"
+  }
+});
+
+const _PhysicalSchema = new SimpleSchema({
+  brand: {
+    type: String
+  },
+  categories: {
+    type: [ String ], // e.g. "Clothing", "Shoe", etc
+  },
+  
+  // persiapan aja biar gak lupa
+  // inventories: {
+  //   type: [ _InventorySchema ]
+  // }
+});
+
+
 Product.attachSchema(Product.schema);
+Product.attachSchema(_CrowdfundingSchema, {selector: {type: "Crowdfunding"}});
+Product.attachSchema(_PhysicalSchema, {selector: {type: "Physical"}});
 
 Product.publicFields = {
   _id           : 1,
@@ -118,14 +190,6 @@ Product.publicFields = {
 };
 
 Product.helpers({
-	owner(){
-		if(this.ownerType === 'Member')
-			return Member.findOne(this.ownerId);
-		if(this.ownerType === 'Org')
-			return Org.findOne(this.ownerId);
-	},
-  logs(){
-    return Log.find({refName:'Product',refId:this._id});
-  },
+
 });
 
