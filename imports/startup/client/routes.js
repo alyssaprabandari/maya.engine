@@ -64,6 +64,8 @@ Meteor.startup(() => {
         try{
           tenant = Tenant.findOne();
           if(tenant){
+            Meteor.settings.public.tenant = tenant.domain;
+
             //FIXME temporarily manual import n only bootstrap right now
             if(tenant.layout.framework === 'Bootstrap')
               import 'bootstrap/dist/css/bootstrap.min.css';
