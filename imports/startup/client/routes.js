@@ -60,7 +60,7 @@ const renderDynamicRoute = (page) => {
 Meteor.startup(() => {
   Meteor.subscribe("getTenantInfo", {
     onReady: function(){
-      Tracker.autorun(function () {
+      // Tracker.autorun(function () {
         try{
           tenant = Tenant.findOne();
           if(tenant){
@@ -100,7 +100,7 @@ Meteor.startup(() => {
           console.log(exception);
           Bert.alert('Configuration Error', 'danger');
         }
-      });
+      // });
     }
   });
 
