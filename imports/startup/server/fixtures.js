@@ -468,7 +468,7 @@ tenants.forEach((tenant) => {
   };
   
 	const tenantUsers = _.where(users,{domain:tenant.domain});
-	console.log('tenantUsers found in fixtures: ', tenantUsers);
+	console.log('tenantUsers found in fixtures: ', tenantUsers.length);
 
 	let tenantOwners = [];
 
@@ -516,7 +516,7 @@ tenants.forEach((tenant) => {
 	Tenant._collection.update({ _id: tenantId }, { $set:{ owners:tenantOwners } });
 	console.log('update Tenant with owners: ', tenantOwners);
 
-	if(Info.find().fetch().length < infos.length ){
+	if(Info.find({tenantId:tenantId}).fetch().length < infos.length ){
 		console.log('now injecting info collection...');
 		infos.forEach((info) => {
 			info.tenantId = tenantId;

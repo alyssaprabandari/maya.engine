@@ -42,4 +42,3 @@ import '../../api/article/server/article_methods.js';
 
 import '../../api/info/server/info_publications.js';
 import '../../api/info/server/info_methods.js';
-

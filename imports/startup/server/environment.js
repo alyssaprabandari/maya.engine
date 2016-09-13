@@ -3,7 +3,7 @@ if ( Meteor.settings.private && Meteor.settings.private.AWS_SES_ACCESS && Meteor
   encodeURIComponent(Meteor.settings.private.AWS_SES_ACCESS) + ':' +
   encodeURIComponent(Meteor.settings.private.AWS_SES_SECRET) + '@' +
   encodeURIComponent('email-smtp.us-east-1.amazonaws.com') + ':' + 465;
-}
+};
 
 Match._id = Match.Where(id => {
   check(id, String);
