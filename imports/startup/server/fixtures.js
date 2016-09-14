@@ -83,7 +83,8 @@ if(process.env.NODE_ENV === 'development'){
 		  "widgets" : [ 
 		    "AppNavigation", 
 		    "HeadlineCarousel", 
-		    "Welcome"
+		    "Welcome",
+	    	"Footer"
 		  ]
 		},
 		"pages" : [ 
@@ -93,7 +94,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Login"
+		      "Login",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -102,7 +104,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "RecoverPassword"
+		      "RecoverPassword",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -111,7 +114,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "ResetPassword"
+		      "ResetPassword",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -120,7 +124,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Signup"
+		      "Signup",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -128,7 +133,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "path" 		: "/welcome",
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "ProductCard"
+		      "ProductCard",
+		      "Footer"
 		    ],
 		    "menuNr" 	: 1
 		  }, 
@@ -143,7 +149,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "Welcome", 
-		      "DocumentTable"
+		      "DocumentTable",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 2
 		  }, 
@@ -157,7 +164,8 @@ if(process.env.NODE_ENV === 'development'){
 		    ],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "DocumentDetail"
+		      "DocumentDetail",
+		    	"Footer"
 		    ]
 		  }, 
 		  {
@@ -166,7 +174,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "FAQ"
+		      "FAQ",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 3
 		  }, 
@@ -179,7 +188,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "Documents", 
-		      "Documents"
+		      "Documents",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 4
 		  }
@@ -278,7 +288,8 @@ if(process.env.NODE_ENV === 'development'){
 		  "widgets" : [ 
 		    "AppNavigation", 
 		    "HeadlineCarousel", 
-		    "Welcome"
+		    "Welcome",
+	      	"Footer"
 		  ]
 		},
 		"pages" : [ 
@@ -288,7 +299,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Login"
+		      "Login",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -297,7 +309,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "RecoverPassword"
+		      "RecoverPassword",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -306,7 +319,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "ResetPassword"
+		      "ResetPassword",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -315,7 +329,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Signup"
+		      "Signup",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -324,7 +339,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "SearchForm",
-		      "ProductCard"
+		      "ProductCard",
+		      "Footer"
 		    ],
 		    "menuNr" 	: 1
 		  }, 
@@ -333,7 +349,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "path" 		: "/product/:productId/detail",
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "ProductDetail"
+		      "ProductDetail",
+		      "Footer"
 		    ],
 		  }, 
 		  {
@@ -347,7 +364,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "Welcome", 
-		      "DocumentTable"
+		      "DocumentTable",
+		      "Footer"
 		    ],
 		    "menuNr" 	: 2
 		  }, 
@@ -361,7 +379,8 @@ if(process.env.NODE_ENV === 'development'){
 		    ],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "DocumentDetail"
+		      "DocumentDetail",
+		      "Footer"
 		    ]
 		  }, 
 		  {
@@ -370,7 +389,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "FAQ"
+		      "FAQ",
+		      "Footer"
 		    ],
 		    "menuNr" 	: 3
 		  }, 
@@ -382,7 +402,8 @@ if(process.env.NODE_ENV === 'development'){
 		    ],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Documents"
+		      "Documents",
+		      "Footer"
 		    ],
 		    "menuNr" 	: 4
 		  }
@@ -470,7 +491,8 @@ if(process.env.NODE_ENV === 'development'){
 		  "widgets" : [ 
 		    "AppNavigation", 
 		    "HeadlineCarousel", 
-		    "Welcome"
+		    "Welcome",
+		    "Footer"
 		  ]
 		},
 		"pages" : [ 
@@ -480,7 +502,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Login"
+		      "Login",
+		    	"Footer"
 		    ]
 		  }, 
 		  {
@@ -489,7 +512,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "RecoverPassword"
+		      "RecoverPassword",
+		    	"Footer"
 		    ]
 		  }, 
 		  {
@@ -498,7 +522,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "ResetPassword"
+		      "ResetPassword",
+		    	"Footer"
 		    ]
 		  }, 
 		  {
@@ -507,7 +532,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Signup"
+		      "Signup",
+		    	"Footer"
 		    ]
 		  }, 
 		  {
@@ -515,7 +541,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "path" 		: "/welcome",
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "ProductCard"
+		      "ProductCard",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 1
 		  }, 
@@ -530,7 +557,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "Welcome", 
-		      "DocumentTable"
+		      "DocumentTable",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 2
 		  }, 
@@ -544,7 +572,8 @@ if(process.env.NODE_ENV === 'development'){
 		    ],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "DocumentDetail"
+		      "DocumentDetail",
+		    	"Footer"
 		    ]
 		  }, 
 		  {
@@ -553,7 +582,8 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" 	: [],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "FAQ"
+		      "FAQ",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 3
 		  }, 
@@ -565,7 +595,8 @@ if(process.env.NODE_ENV === 'development'){
 		    ],
 		    "widgets" : [ 
 		      "AppNavigation", 
-		      "Documents"
+		      "Documents",
+		    	"Footer"
 		    ],
 		    "menuNr" 	: 4
 		  }
@@ -730,6 +761,19 @@ if(process.env.NODE_ENV === 'development'){
 		status 			: "Active",
 		brand 			: "Brand Pertama",
 		brandType 	: "1101-ABC",
+		images			: [{
+			imgUrl 	: "http://ecommerce.maya:3000/images/500x300.png",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
 		tags 				: [ "Clothing", "Wearables" ], 
 		domain 			: "ecommerce.maya",
 	},{
@@ -742,7 +786,38 @@ if(process.env.NODE_ENV === 'development'){
 		status 			: "Active",
 		brand 			: "Brand Kedua",
 		brandType 	: "secProd 7S Plus",
+		images			: [{
+			imgUrl 	: "http://ecommerce.maya:3000/images/500x300.png",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
 		tags 				: [ "Machinery", "Transformer" ], 
+		domain 			: "ecommerce.maya",
+	},{
+		name 				: "Third Product",
+		unitPrice 	: 1250000,
+		currency 		: "IDR",
+		uom 				: "Pieces",
+		description : "This is Third Product of ecommerce.maya",
+		type 				: "Physical",
+		status 			: "Active",
+		brand 			: "Brand Ketiga",
+		brandType 	: "3313",
+		tags 				: [ "Computer", "Tablet" ], 
 		domain 			: "ecommerce.maya",
 	}];
 
@@ -814,7 +889,7 @@ if(process.env.NODE_ENV === 'development'){
 			console.log('now injecting info collection...');
 			infos.forEach((info) => {
 				info.tenantId = tenantId;
-				info.imgUrl 	= "http://"+tenant.domain+":3000/images/carousel.png";
+				info.imgUrl 	= "http://"+tenant.domain+":3000/images/1900x1080_SlideOne.png";
 				info.owners 	= tenantOwners;
 
 				//FIXME harusnya cek type, bila Product, inject juga ke refs, tentunya kita buat data dulu di Product Collection 

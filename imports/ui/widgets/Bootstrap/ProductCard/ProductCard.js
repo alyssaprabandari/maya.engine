@@ -10,13 +10,22 @@ import { goLink } from '/imports/modules/utils';
 
 import { Product } from '/imports/api/product/product_collection';
 
+const productThumbnail = (images) => {
+  if(images){
+    const thumbnail = _.findWhere(images,{imgType:'Thumbnail'});
+    if(thumbnail && thumbnail.imgUrl)
+      return thumbnail.imgUrl;
+  };
+  return Meteor.settings.public.defaultProductThumbnail;
+};
+
 const ProductCard = ({products}) => (
   products.length > 0 
   ? <Grid>
   		<Row>
         { products.map( (product) => (
         	<Col key={product._id} xs={12} md={4}>
-        		<Thumbnail alt="Product Name" src="/images/carousel.png" onClick={ goLink.bind(this, '/product/'+product._id+'/detail') }>
+        		<Thumbnail alt="Product Name" src={ productThumbnail(product.images) } onClick={ goLink.bind(this, '/product/'+product._id+'/detail') }>
         			<h3>{ product.name }</h3>
         			<p>{ product.currency } { product.unitPrice.toLocaleString() }</p>
         		</Thumbnail>

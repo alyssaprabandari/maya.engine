@@ -12,6 +12,10 @@ export const widgetImporter = (widget) => {
 					import AppContainer from '/imports/ui/widgets/Bootstrap/App/AppContainer'; return AppContainer;
 				case 'AppNavigation':
 					import AppNavigation from '/imports/ui/widgets/Bootstrap/AppNavigation/AppNavigationContainer'; return AppNavigation;
+				
+				case 'Footer':
+					import { Footer } from '/imports/ui/widgets/Bootstrap/Footer/Footer'; return Footer;
+				
 				case 'Login': 
 					import { Login } from '/imports/ui/widgets/Bootstrap/Login/Login'; return Login;
 				case 'RecoverPassword': 
