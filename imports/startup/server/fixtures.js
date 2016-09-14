@@ -257,6 +257,14 @@ if(process.env.NODE_ENV === 'development'){
 		    "name" 	: "insertProduct",
 		    "roles" : ["Admin", "Internal.Ops"],
 		    "type" 	: "Product.Method"
+		  },{
+		    "name" 	: "listActiveProduct",
+		    "roles" : [],
+		    "type" 	: "Product.Publication"
+		  },{
+		    "name" 	: "listAllProduct",
+		    "roles" : ["Admin", "Internal.Ops"],
+		    "type" 	: "Product.Publication"
 		  }
 		],
 		"index" : {
@@ -311,6 +319,7 @@ if(process.env.NODE_ENV === 'development'){
 		    "path" 		: "/welcome",
 		    "widgets" : [ 
 		      "AppNavigation", 
+		      "SearchForm",
 		      "ProductCard"
 		    ],
 		    "menuNr" 	: 1
@@ -814,7 +823,7 @@ if(process.env.NODE_ENV === 'development'){
 				delete tenantProduct["domain"];
 				tenantProduct.tenantId = tenantId;
 				console.log('tenantProduct', tenantProduct);
-				const productId = Product.insert(tenantProduct);
+				const productId = Product.insert(tenantProduct,{validate:false});
 				console.log('created productId: ', productId);
 			};
 		});

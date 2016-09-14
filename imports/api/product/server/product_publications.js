@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { initAPIsToDB, isUserHasAccess } from '/imports/api/general/server/general_server_functions';
+import { initAPIsToDB, isUserHasAccess, constructSearchQuery } from '/imports/api/general/server/general_server_functions';
 
 import { Product } from '/imports/api/product/product_collection.js';
 
@@ -22,7 +22,7 @@ const APIs = {
 
 initAPIsToDB(APIs, apiType);
 
-const searchFieldNames = ['name','unitPrice','currency','uom','description','type'];
+const searchFieldNames = ['name','unitPrice','currency','uom','description','brand','brandType','tags','type'];
 
 Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
   const apiName = APIs.listAllProduct.name;
@@ -44,7 +44,7 @@ Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
               'tenantId'          : tenantId,
               'owners.partyId'    : this.userId,
               'owners.partyType'  : 'Member',
-            }, queryCommon
+            }, querySearch
           ]
         };
         const options = {
@@ -62,3 +62,42 @@ Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
     return this.ready();
   }
 });
+
+Meteor.publishComposite(APIs.listActiveProduct.name, function(searchText, limit) {
+  const apiName = APIs.listActiveProduct.name;
+  try{
+    check(limit, Number);
+    check(searchText, Match.Maybe(String));
+    
+    if(searchText)
+      check(searchText, Match.textOnly);
+
+    const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
+        
+    return {
+      find() {
+        const querySearch = constructSearchQuery(searchFieldNames,searchText);        
+        const query = { 
+          $and:[
+            {
+              'tenantId'          : tenantId,
+              'status'            : 'Active',
+            }, querySearch
+          ]
+        };
+        const options = {
+          fields: Product.publicFields, //FIXME adjust sesuai kebutuhan
+          sort: {
+            sequenceNr  : 1,
+            timestamp   : -1
+          }
+        };
+        return Product.find(query,options);
+      },
+    };
+  }catch(exception){
+    console.log('EXCEPTION - '+apiName+' - '+apiType+' - userId: '+this.userId, exception);
+    return this.ready();
+  }
+});
+
