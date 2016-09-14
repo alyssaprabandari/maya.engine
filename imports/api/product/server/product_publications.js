@@ -18,6 +18,12 @@ const APIs = {
     type          : apiType,
     status        : 'Active',
   },
+  detailProduct: {
+    name          : 'detailProduct',
+    description   : 'Product Detail',
+    type          : apiType,
+    status        : 'Active',
+  },
 };
 
 initAPIsToDB(APIs, apiType);
@@ -101,3 +107,26 @@ Meteor.publishComposite(APIs.listActiveProduct.name, function(searchText, limit)
   }
 });
 
+Meteor.publishComposite(APIs.detailProduct.name, function(productId) {
+  const apiName = APIs.detailProduct.name;
+  try{
+    check(productId, Match._id);
+    
+    const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
+        
+    return {
+      find() {
+        const query = { 
+          _id: productId
+        };
+        const options = {
+          fields: Product.publicFields,
+        };
+        return Product.find(query,options);
+      },
+    };
+  }catch(exception){
+    console.log('EXCEPTION - '+apiName+' - '+apiType+' - userId: '+this.userId, exception);
+    return this.ready();
+  }
+});

@@ -40,6 +40,8 @@ export const widgetImporter = (widget) => {
 
 				case 'ProductCard': 
 					import ProductCard from '/imports/ui/widgets/Bootstrap/ProductCard/ProductCard'; return ProductCard;
+				case 'ProductDetail': 
+					import ProductDetail from '/imports/ui/widgets/Bootstrap/ProductDetail/ProductDetail'; return ProductDetail;
 				
 				default: 
 					import { NotFound } from '/imports/ui/widgets/Bootstrap/NotFound/NotFound'; return NotFound;

@@ -265,6 +265,10 @@ if(process.env.NODE_ENV === 'development'){
 		    "name" 	: "listAllProduct",
 		    "roles" : ["Admin", "Internal.Ops"],
 		    "type" 	: "Product.Publication"
+		  },{
+		    "name" 	: "detailProduct",
+		    "roles" : [],
+		    "type" 	: "Product.Publication"
 		  }
 		],
 		"index" : {
@@ -315,14 +319,22 @@ if(process.env.NODE_ENV === 'development'){
 		    ]
 		  }, 
 		  {
-		    "title" 	: "Selamat Datang",
-		    "path" 		: "/welcome",
+		    "title" 	: "Products",
+		    "path" 		: "/products",
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "SearchForm",
 		      "ProductCard"
 		    ],
 		    "menuNr" 	: 1
+		  }, 
+		  {
+		    "title" 	: "Product Detail",
+		    "path" 		: "/product/:productId/detail",
+		    "widgets" : [ 
+		      "AppNavigation", 
+		      "ProductDetail"
+		    ],
 		  }, 
 		  {
 		    "title" 	: "Halaman Kedua",
@@ -760,7 +772,7 @@ if(process.env.NODE_ENV === 'development'){
 	  	
 	  	let userId;
 		  if (!userExists){
-		  	console.log('user not found in DB, now processing fixtures...');
+		  	// console.log('user not found in DB, now processing fixtures...');
 		    userId = Accounts.createUser({ email:tenantUser.email, password:tenantUser.password, profile:tenantUser.profile });
 		    console.log('userId created: ', userId);
 			}else{
