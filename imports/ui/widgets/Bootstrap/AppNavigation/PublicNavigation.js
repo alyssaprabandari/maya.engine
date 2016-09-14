@@ -2,10 +2,12 @@ import React from 'react';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem } from 'react-bootstrap';
 
+import { toggleNav } from '/imports/modules/utils';
+
 import { MenuNavItem } from './MenuNavItem';
 
 export const PublicNavigation = ({menus}) => (
-    <div>
+    <div onClick={ toggleNav }>
       <Nav>
         <IndexLinkContainer to="/">
           <NavItem eventKey="home" href="/">Home</NavItem>

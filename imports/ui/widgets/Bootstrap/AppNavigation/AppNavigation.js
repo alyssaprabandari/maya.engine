@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import { PublicNavigation } from './PublicNavigation';
 import { AuthenticatedNavigation } from './AuthenticatedNavigation';
 
+import { toggleNav } from '/imports/modules/utils';
+
 export class AppNavigation extends React.Component {
   renderNavigation(hasUser, tenant) {
     
@@ -27,14 +29,14 @@ export class AppNavigation extends React.Component {
     if(!!tenant.isPublicMenuInAuthNav)
       authMenus = publicMenus.concat(authMenus);
 
-    return hasUser ? <AuthenticatedNavigation menus={authMenus}/> : <PublicNavigation menus={publicMenus}/>;
+    return hasUser ? <AuthenticatedNavigation menus={ authMenus }/> : <PublicNavigation menus={ publicMenus }/>;
   }
 
   render() {
     return <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">{ this.props.tenant.name }</Link>
+          <Link to="/" onClick={ toggleNav } >{ this.props.tenant.name }</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>

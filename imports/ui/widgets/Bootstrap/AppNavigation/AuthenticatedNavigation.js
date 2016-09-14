@@ -4,9 +4,9 @@ import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 
-import { MenuNavItem } from './MenuNavItem';
+import { toggleNav, handleLogout } from '/imports/modules/utils';
 
-const handleLogout = () => Meteor.logout(() => browserHistory.push('/login'));
+import { MenuNavItem } from './MenuNavItem';
 
 const userName = () => {
   return Meteor.user() && Meteor.user().profile ? Meteor.user().profile.fullname : '';
@@ -14,7 +14,7 @@ const userName = () => {
 
 export const AuthenticatedNavigation = ({ menus }) => (
   <div>
-    <Nav>
+    <Nav onClick={ toggleNav }>
       { menus.map((menu) => 
         <MenuNavItem key={ menu.path } menu={ menu } /> 
       )}
