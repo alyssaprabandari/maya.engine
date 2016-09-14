@@ -7,6 +7,7 @@ if(process.env.NODE_ENV === 'development'){
 	import { Tenant } from '/imports/api/tenant/tenant_collection';
 	import { Member } from '/imports/api/member/member_collection';
 	import { Info } from '/imports/api/info/info_collection';
+	import { Product } from '/imports/api/product/product_collection';
 
 	const tenants = [{
 		"domain" 	: "localhost",
@@ -698,6 +699,32 @@ if(process.env.NODE_ENV === 'development'){
 		"status" 				: "Active",
 	}];
 
+	const products = [{
+		name 				: "First Product",
+		unitPrice 	: 123456,
+		currency 		: "IDR",
+		uom 				: "Pieces",
+		description : "This is First Product of ecommerce.maya",
+		type 				: "Physical",
+		status 			: "Active",
+		brand 			: "Brand Pertama",
+		brandType 	: "1101-ABC",
+		tags 				: [ "Clothing", "Wearables" ], 
+		domain 			: "ecommerce.maya",
+	},{
+		name 				: "Second Product",
+		unitPrice 	: 987654321,
+		currency 		: "IDR",
+		uom 				: "Pieces",
+		description : "This is Second Product of ecommerce.maya",
+		type 				: "Physical",
+		status 			: "Active",
+		brand 			: "Brand Kedua",
+		brandType 	: "secProd 7S Plus",
+		tags 				: [ "Machinery", "Transformer" ], 
+		domain 			: "ecommerce.maya",
+	}];
+
 	tenants.forEach((tenant) => {
 		console.log('****************** START fixtures for tenant: ', tenant.domain);
 
@@ -777,6 +804,20 @@ if(process.env.NODE_ENV === 'development'){
 		}else{
 			console.log('skipping infos creation...');
 		};
+
+		const tenantProducts = _.where(products,{domain:tenant.domain});
+		console.log('tenantProducts found in fixtures: ', tenantProducts.length);
+
+		tenantProducts.forEach((tenantProduct) => {
+			const foundProduct = Product.findOne({name:tenantProduct.name});
+			if(!foundProduct){
+				delete tenantProduct["domain"];
+				tenantProduct.tenantId = tenantId;
+				console.log('tenantProduct', tenantProduct);
+				const productId = Product.insert(tenantProduct);
+				console.log('created productId: ', productId);
+			};
+		});
 		
 
 	  console.log('****************** END fixtures for tenant: ', tenant.domain);

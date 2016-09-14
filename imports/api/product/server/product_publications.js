@@ -41,11 +41,10 @@ Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
         const query = { 
           $and:[
             {
-              tenantId  : tenantId,
-              // owners.partyId    : this.userId,
-              // owners.partyType  : 'Member',
-            },
-            queryCommon
+              'tenantId'          : tenantId,
+              'owners.partyId'    : this.userId,
+              'owners.partyType'  : 'Member',
+            }, queryCommon
           ]
         };
         const options = {

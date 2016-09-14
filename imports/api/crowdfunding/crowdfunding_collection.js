@@ -5,14 +5,14 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _ImageSchema, _PartySchema, _RefSchema } from '/imports/api/general_schemas';
 
-class ProductCollection extends Mongo.Collection {
+class CrowdfundingCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);    
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
-		return result;
+    return result;
   }
   remove(selector) {
     const result = super.remove(selector);
@@ -20,37 +20,85 @@ class ProductCollection extends Mongo.Collection {
   }
 };
 
-export const Product = new ProductCollection('product');
+export const Crowdfunding = new CrowdfundingCollection('crowdfunding');
 
 // Deny all client-side updates since we will be using methods to manage this collection
-Product.deny({
+Crowdfunding.deny({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
 });
 
-Product.schema = new SimpleSchema({
-	name: {
-		type: String,
-		label: 'Name of this Product',
-	},
+const _SupporterSchema = new SimpleSchema({
+  party: {
+    type: _PartySchema,
+  },
+  acctId: {
+    type: SimpleSchema.RegEx.Id,
+  },
+  fundAmount: {
+    type: Number,
+    decimal: true,
+  },
+  anonymous: {
+    type: Boolean,
+    defaultValue: false
+  },
+  timestamp: {
+    type: Date,
+    autoValue : function(){
+      return new Date();
+    },
+  },
+});
+
+Crowdfunding.schema = new SimpleSchema({
+  name: {
+    type: String,
+    label: 'Name of this Crowdfunding',
+  },
   tenantId: {
     type: SimpleSchema.RegEx.Id,
     label: 'tenantId of this Product'
   },
   
-  unitPrice: {
+  recipient: {
+    type: _PartySchema
+  },
+  recipientAcctId: {
+    type: SimpleSchema.RegEx.Id
+  },
+  supporters : {
+    type: [ _SupporterSchema ],
+  },
+
+  fundMin: {
     type: Number,
     decimal: true,
-    label: 'Unit Price of this Product',
+    label: 'Minimum Amount a User can fund',
+    defaultValue: 0
+  },
+  fundRaised: {
+    type: Number,
+    decimal: true,
+    defaultValue: 0
+  },
+  fundTarget: {
+    type: Number,
+    decimal: true,
   },
   currency: {
     type: String,
     allowedValues   : ["IDR", "USD", "EUR"],
     defaultValue    : "IDR"
   },
-  uom: {
-    type: String,
+  
+  fromDate: {
+    type: Date
+  },
+  thruDate: {
+    type: Date,
+    optional: true
   },
 
   images: {
@@ -63,21 +111,10 @@ Product.schema = new SimpleSchema({
     optional  : true
   },
 
-  brand: {
-    type: String,
-    optional: true,
-  },
-  brandType: {
-    type: String,
-    optional: true,
-  },
   tags: {
-    type: [ String ], // e.g. "Clothing", "Shoe", Product Type, Product Categories, etc
+    type: [ String ],
     optional: true,
   },  
-  // inventories: {
-  //   type: [ _InventorySchema ]
-  // },
 
   sequenceNr: {
     type: Number,
@@ -85,7 +122,7 @@ Product.schema = new SimpleSchema({
   },
   type: {
     type: String,
-    allowedValues   : ["Physical", "Virtual", "Rental", "Subscription"], // adjust with business process
+    allowedValues   : [ "Scholarship", "Kickstarter" ], // adjust with business process
   },
   status: {
     type: String,
@@ -94,7 +131,7 @@ Product.schema = new SimpleSchema({
   },
 
   owners: {
-    type: [ _PartySchema ], // useful for marketplace type of ecommerce
+    type: [ _PartySchema ], // useful for marketplace type of crowdfunding, e.g. user can create own crowdfunding
     optional: true,
   },
   refs: {
@@ -118,33 +155,35 @@ Product.schema = new SimpleSchema({
 
 });
 
-// Product.attachSchema(_PhysicalProductSchema, {selector: {type: "Physical"}});
-// Product.attachSchema(_VirtualProductSchema, {selector: {type: "Virtual"}});
-// Product.attachSchema(_SubscriptionProductSchema, {selector: {type: "Subscription"}});
 
-Product.attachSchema(Product.schema);
+Crowdfunding.attachSchema(Crowdfunding.schema);
 
-Product.publicFields = {
+Crowdfunding.publicFields = {
   _id           : 1,
   name          : 1,
   
-  unitPrice     : 1,
-  currency      : 1,
-  uom           : 1,
+  recipient     : 1,
 
+  fundMin       : 1,
+  fundRaised    : 1,
+  fundTarget    : 1,
+  currency      : 1,
+
+  fromDate      : 1,
+  thruDate      : 1,
+  
   images        : 1,
   description   : 1,
 
-  brand					: 1,
-  brandType			: 1,
-  tags					: 1,
+  tags          : 1,
 
   sequenceNr    : 1,
   type          : 1,
   status        : 1,
 };
 
-Product.helpers({
+Crowdfunding.helpers({
 
 });
+
 
