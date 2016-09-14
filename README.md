@@ -16,7 +16,7 @@ curl https://install.meteor.com/ | sh
 ```bash
 127.0.0.1   ecommerce.maya
 127.0.0.1   crowdfunding.maya
-```bash
+```
 
 Those are 2 "example-domains" that I included in fixtures.
 
@@ -26,7 +26,7 @@ Those are 2 "example-domains" that I included in fixtures.
   "public": {},
   "private": {}
 }
-```bash
+```
 
 4. Install all the needed modules
 ```bash
