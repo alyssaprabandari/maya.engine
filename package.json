@@ -12,7 +12,8 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
     "chimp-test": "chimp --ddp=http://localhost:3000 --mocha --path=tests",
     "staging": "meteor deploy staging.meteor.com --settings settings-development.json",
-    "production": "meteor deploy production.meteor.com --settings settings-production.json"
+    "production": "meteor deploy production.meteor.com --settings settings-production.json",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "chimp": "^0.39.1",
