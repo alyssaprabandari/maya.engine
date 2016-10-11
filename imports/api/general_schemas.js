@@ -110,3 +110,99 @@ export const _RefSchema = new SimpleSchema({
     optional: true,
 	},
 });
+
+export const _GeneralSchema = new SimpleSchema({
+  tenantId: {
+    type: SimpleSchema.RegEx.Id,
+    label: 'tenantId of this document'
+  },
+
+  description: {
+    type      : String,
+    label     : "Description",
+    optional  : true
+  },
+
+  sequenceNr: {
+    type: Number,
+    defaultValue: 0
+  },
+  
+  owners: {
+    type: [ _PartySchema ], // useful for marketplace type of ecommerce
+    optional: true, //FIXME by default must be one record
+  },
+  refs: {
+    type: [ _RefSchema ],
+    optional: true
+  },
+
+  createdBy: {
+    type      : SimpleSchema.RegEx.Id,
+    label     : "Creator of this document",
+    autoValue   : function(){
+      if (this.isInsert){
+          return this.userId;
+        } else if (this.isUpsert) {
+          return {$setOnInsert: this.userId};
+        } else {
+          this.unset();
+        }
+    }
+  },
+  createdAt: {
+    type: Date,
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date();
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date()};
+      } else {
+        this.unset();  // Prevent user from supplying their own value
+      }
+    }
+  },
+
+  lastModifiedBy: {
+    type: SimpleSchema.RegEx.Id,
+    autoValue : function(){
+      return this.userId;
+    },
+  },
+  lastModifiedAt: {
+    type: Date,
+    label: 'Latest Timestamp',
+    autoValue : function(){
+      return new Date();
+    },
+  },
+
+  updatesHistory: {
+    type: Array,
+    optional: true,
+    autoValue: function() {
+      if (this.isInsert) {
+        return [{
+          userId    : this.userId,
+          timestamp : this.field("createdAt").value,
+        }];
+      } else {
+        return {
+          $push: {
+            userId    : this.userId,
+            timestamp : this.field("lastModifiedAt").value,
+          }
+        };
+      }
+    }
+  },
+  'updatesHistory.$': {
+    type: Object,
+  },
+  'updatesHistory.$.userId': {
+    type: SimpleSchema.RegEx.Id,
+  },
+  'updatesHistory.$.timestamp': {
+    type: Date,
+  },
+})

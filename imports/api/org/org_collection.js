@@ -38,7 +38,6 @@ Org.schema = new SimpleSchema({
 	},
   tenantId: {
     type: SimpleSchema.RegEx.Id,
-    optional: true,
   },
 	description: {
 		type: String,
@@ -50,8 +49,7 @@ Org.schema = new SimpleSchema({
 	type: {
 		type: String,
 		label: 'Organisation Type',
-		allowedValues   : ['Group','Division','Department','Company', 'NGO'],
-		defaultValue 		: 'Company'
+		allowedValues   : ['Group', 'Division', 'Department', 'Company', 'NGO', 'Shop'],
 	},
 	status: {
 		type: String,

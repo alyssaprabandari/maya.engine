@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _PartySchema, _RefSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _PartySchema, _RefSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 class ProductCollection extends Mongo.Collection {
   insert(doc, callback) {
@@ -34,10 +34,6 @@ Product.schema = new SimpleSchema({
 		type: String,
 		label: 'Name of this Product',
 	},
-  tenantId: {
-    type: SimpleSchema.RegEx.Id,
-    label: 'tenantId of this Product'
-  },
   
   unitPrice: {
     type: Number,
@@ -57,20 +53,15 @@ Product.schema = new SimpleSchema({
     type      : [ _ImageSchema ],
     optional  : true
   },
-  description: {
-    type      : String,
-    label     : "External Description",
-    optional  : true
-  },
 
   brand: {
     type: String,
     optional: true,
   },
-  // brandType: {
-  //   type: String,
-  //   optional: true,
-  // },
+  brandType: {
+    type: String,
+    optional: true,
+  },
 
   sku: {
     type: String,
@@ -89,10 +80,6 @@ Product.schema = new SimpleSchema({
   //   type: [ _InventorySchema ]
   // },
 
-  sequenceNr: {
-    type: Number,
-    defaultValue: 0
-  },
   type: {
     type: String,
     allowedValues   : ["Physical", "Virtual", "Rental", "Subscription"], // adjust with business process
@@ -103,29 +90,6 @@ Product.schema = new SimpleSchema({
     defaultValue    : "Draft"
   },
 
-  owners: {
-    type: [ _PartySchema ], // useful for marketplace type of ecommerce
-    optional: true,
-  },
-  refs: {
-    type: [ _RefSchema ],
-    optional: true
-  },
-
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
-
 });
 
 // Product.attachSchema(_PhysicalProductSchema, {selector: {type: "Physical"}});
@@ -133,6 +97,7 @@ Product.schema = new SimpleSchema({
 // Product.attachSchema(_SubscriptionProductSchema, {selector: {type: "Subscription"}});
 
 Product.attachSchema(Product.schema);
+Product.attachSchema(_GeneralSchema);
 
 Product.publicFields = {
   _id           : 1,
@@ -143,7 +108,6 @@ Product.publicFields = {
   uom           : 1,
 
   images        : 1,
-  description   : 1,
 
   brand					: 1,
   brandType			: 1,
@@ -152,9 +116,11 @@ Product.publicFields = {
   
   tags					: 1,
 
-  sequenceNr    : 1,
   type          : 1,
   status        : 1,
+
+  description   : 1,
+  sequenceNr    : 1,
 };
 
 Product.helpers({
