@@ -67,10 +67,20 @@ Product.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  brandType: {
+  // brandType: {
+  //   type: String,
+  //   optional: true,
+  // },
+
+  sku: {
     type: String,
     optional: true,
   },
+  barcode: {
+    type: String,
+    optional: true,
+  },
+
   tags: {
     type: [ String ], // e.g. "Clothing", "Shoe", Product Type, Product Categories, etc
     optional: true,
@@ -137,6 +147,9 @@ Product.publicFields = {
 
   brand					: 1,
   brandType			: 1,
+  sku           : 1,
+  barcode       : 1,
+  
   tags					: 1,
 
   sequenceNr    : 1,

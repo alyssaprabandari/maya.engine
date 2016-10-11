@@ -21,17 +21,17 @@ const ProductDetail = ({product}) => {
 		return(
 		  <Grid>
 	  		<Row>
+	  			<Col xs={12} md={8}>
+	      		<Image src={ images[0].imgUrl } rounded responsive />
+	      	</Col>
 	        <Col xs={12} md={4}>
 	          <h3>{ product.name }</h3>
-	          <p>{ product.brand } { product.brandType }</p>
+	          <p>{ product.brand } - { product.sku }</p>
 	          <p>{ product.currency } { product.unitPrice.toLocaleString() }</p>
 	          <p>{ product.description }</p>
 	          <Button bsStyle="primary">Buy Now</Button>
 	          <p>&nbsp;</p>
 	        </Col>
-	      	<Col xs={12} md={8}>
-	      		<Image src={ images[0].imgUrl } responsive />
-	      	</Col>
 	      </Row>
 	      <hr/>
 	      <Row>
