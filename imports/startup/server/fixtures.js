@@ -752,48 +752,40 @@ if(process.env.NODE_ENV === 'development'){
 	}];
 
 	const products = [{
-		name 				: "First Product",
+		name 				: "Mie Ijo",
 		unitPrice 	: 123456,
 		currency 		: "IDR",
-		uom 				: "Pieces",
-		description : "This is First Product of ecommerce.maya",
+		uom 				: "Porsi",
+		description : "Penjelasan tentang Mie Ijo",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Brand Pertama",
-		brandType 	: "1101-ABC",
+		brand 			: "Deliciozo",
 		images			: [{
-			imgUrl 	: "http://ecommerce.maya:3000/images/500x300.png",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
 			imgType : "Thumbnail"
 		},{
-			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
-			imgType : "Detail"
-		},{
-			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
 			imgType : "Detail"
 		},{
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Clothing", "Wearables" ], 
+		tags 				: [ "Bakmi", "Mi", "Mie", "Caisim" ], 
 		domain 			: "ecommerce.maya",
 	},{
-		name 				: "Second Product",
+		name 				: "Sambel Roa",
 		unitPrice 	: 987654321,
 		currency 		: "IDR",
-		uom 				: "Pieces",
-		description : "This is Second Product of ecommerce.maya",
+		uom 				: "Botol",
+		description : "Penjelasan dari Sambel Roa",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Brand Kedua",
-		brandType 	: "secProd 7S Plus",
+		brand 			: "Warung Ngana",
 		images			: [{
-			imgUrl 	: "http://ecommerce.maya:3000/images/500x300.png",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
 			imgType : "Thumbnail"
 		},{
-			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
-			imgType : "Detail"
-		},{
-			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
 			imgType : "Detail"
 		},{
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
@@ -805,19 +797,72 @@ if(process.env.NODE_ENV === 'development'){
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Machinery", "Transformer" ], 
+		tags 				: [ "Sambel", "Sambal", "Roa", "Menado", "Manado" ], 
 		domain 			: "ecommerce.maya",
 	},{
-		name 				: "Third Product",
+		name 				: "Ayam Woku",
+		unitPrice 	: 987654321,
+		currency 		: "IDR",
+		uom 				: "Porsi",
+		description : "Penjelasan dari Ayam Woku",
+		type 				: "Physical",
+		status 			: "Active",
+		brand 			: "Warung Ngana",
+		images			: [{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/ayam_woku.jpg",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/ayam_woku.jpg",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
+		tags 				: [ "Ayam", "Woku", "Menado", "Manado" ], 
+		domain 			: "ecommerce.maya",
+	},{
+		name 				: "Brownies Coklat",
 		unitPrice 	: 1250000,
 		currency 		: "IDR",
 		uom 				: "Pieces",
-		description : "This is Third Product of ecommerce.maya",
+		description : "Penjelasan tentang Brownies rasa Coklat",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Brand Ketiga",
-		brandType 	: "3313",
-		tags 				: [ "Computer", "Tablet" ], 
+		brand 			: "Deliciozo",
+		sku 				: "Brownies-Coklat-001",
+		images			: [{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
+		tags 				: [ "Brownies", "Coklat", "Kue" ],
+		domain 			: "ecommerce.maya",
+	},{
+		name 				: "Brownies Keju",
+		unitPrice 	: 1250000,
+		currency 		: "IDR",
+		uom 				: "Pieces",
+		description : "Penjelasan tentang Brownies rasa Keju",
+		type 				: "Physical",
+		status 			: "Active",
+		brand 			: "Deliciozo",
+		sku 				: "Brownies-Keju-001",
+		images			: [{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
+		tags 				: [ "Brownies", "Keju", "Kue" ],
 		domain 			: "ecommerce.maya",
 	}];
 
