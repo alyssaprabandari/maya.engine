@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _PartySchema, _RefSchema, _GeneralSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 class ProductCollection extends Mongo.Collection {
   insert(doc, callback) {

@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _RefSchema, _TenantSchema, _PartySchema } from '/imports/api/general_schemas';
+import { _GeneralSchema } from '/imports/api/general_schemas';
 
 import { AcctMovement } from '/imports/api/acctMovement/acctMovement_collection';
 
@@ -51,12 +51,6 @@ Acct.schema = new SimpleSchema({
 		allowedValues   : ["IDR", "USD", "EUR"],
 	},
 
-  description: {
-    type      : String,
-    label     : "Description",
-    optional  : true
-  },
-
 	type: {
 		type: String,
  		allowedValues   : ["Account.Current", "External"],
@@ -66,36 +60,10 @@ Acct.schema = new SimpleSchema({
 		allowedValues   : ["Active", "Suspended"],
 	},
 
-  tenantId: {
-    type: SimpleSchema.RegEx.Id,
-  },
-
-  owners: {
-    type: [ _PartySchema ],
-    optional: true,
-  },
-	refs: {
-		type: [ _RefSchema ],
-		optional: true
-	},
-
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
-
 });
 
 Acct.attachSchema(Acct.schema);
+Acct.attachSchema(_GeneralSchema);
 
 Acct.publicFields = {
   _id 					: 1,
@@ -104,10 +72,12 @@ Acct.publicFields = {
   saldo 				: 1,
 	currency 			: 1,
 
-  description 	: 1,
-
   type 					: 1,
   status 				: 1,
+
+  description   : 1,
+  lastModifiedAt: 1,
+
 };
 
 Acct.helpers({

@@ -33,7 +33,7 @@ export class AppNavigation extends React.Component {
   }
 
   render() {
-    return <Navbar>
+    return <Navbar fixedTop={true}>
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/" onClick={ toggleNav } >{ this.props.tenant.name }</Link>

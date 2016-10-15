@@ -71,7 +71,7 @@ export const _TenantSchema = new SimpleSchema({
     defaultValue    : 'Active'
   },
   createdAt: {
-    type: Date
+    type: Date  //FIXME please be more specific
   },
 });
 
@@ -114,7 +114,7 @@ export const _RefSchema = new SimpleSchema({
 export const _GeneralSchema = new SimpleSchema({
   tenantId: {
     type: SimpleSchema.RegEx.Id,
-    label: 'tenantId of this document'
+    label: 'tenantId of this document', // special for member, this indicate the first tenant that the member joined
   },
 
   description: {

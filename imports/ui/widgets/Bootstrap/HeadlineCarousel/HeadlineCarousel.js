@@ -9,6 +9,8 @@ import { Info } from '/imports/api/info/info_collection';
 
 import { Carousel } from 'react-bootstrap';
 
+import { goLink } from '/imports/modules/utils';
+
 const HeadlineCarousel = ({ headlines }) => {
 	return (
 	  headlines.length > 0
@@ -16,8 +18,8 @@ const HeadlineCarousel = ({ headlines }) => {
 		  <Carousel>
 				{headlines.map((headline) => (
 					<Carousel.Item key={ headline._id }>
-						<img alt={headline.title} src={headline.imgUrl}/>
-	    			<Carousel.Caption>
+						<img alt={headline.title} src={headline.imgUrl || '/images/1900x1080_SlideOne.png'}/>
+	    			<Carousel.Caption onClick={ goLink.bind(this, '/products/') }>
 	      			<h3>{ headline.title }</h3>
 	    				<p>{ headline.description }</p>
 	    			</Carousel.Caption>
@@ -38,3 +40,4 @@ const composer = (params, onData) => {
 };
 
 export default composeWithTracker(composer, Loading)(HeadlineCarousel);
+			

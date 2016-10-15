@@ -54,7 +54,9 @@ export class SearchForm extends React.Component {
   }
 
   render() {
-    return <Grid>
+    return <div>
+    <hr/>
+    <Grid>
       <form ref="searchForm" onSubmit={ this.handleSubmit }>
         <Row>
           <Col xs={ 8 } sm={ 10 }>
@@ -77,5 +79,6 @@ export class SearchForm extends React.Component {
         </Row>
       </form>
     </Grid>
+    </div>
   }
 }

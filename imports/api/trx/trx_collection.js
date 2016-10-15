@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _RefSchema, _PartySchema } from '/imports/api/general_schemas';
+import { _RefSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 class TrxCollection extends Mongo.Collection {
 	insert(doc, callback) {
@@ -93,12 +93,7 @@ Trx.schema = new SimpleSchema({
 		label: 'Custom Numbering of Transaction, if needed',
 		optional: true,
 	},
-	
-  owners: {
-    type: [ _PartySchema ],
-    optional: true,
-  },
-	
+		
 	trxItems: {
 		type: [ _TrxItemSchema ],
 		label: 'Transaction Items',
@@ -113,10 +108,7 @@ Trx.schema = new SimpleSchema({
 		type: String,
 		allowedValues   : ['IDR', 'USD', 'EUR'],
 	},
-  description: {
-    type      : String,
-    optional 	: true
-  },
+
 	type: {
 		type: String,
  		allowedValues   : ['Sales', 'Sales.Refund', 'Inventory', 'Inventory.Retur', 'Crowdfunding', 'Crowdfunding.Refund'],
@@ -125,29 +117,11 @@ Trx.schema = new SimpleSchema({
 		type: String,
 		allowedValues   : ['Open', 'Paid', 'Cancel', 'Void', 'Closed'], //Cancel is by client and no refund, void is by us and must refund
 	},
-	
-	refs: {
-		type: [ _RefSchema ],
-		optional: true
-	},
-
-	userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
 
 });
 
 Trx.attachSchema(Trx.schema);
+Trx.attachSchema(_GeneralSchema);
 
 Trx.publicFields = {
   _id 				: 1,
@@ -155,10 +129,11 @@ Trx.publicFields = {
   trxItems 		: 1,
   total 			: 1,
   currency		: 1,
-  description : 1,
-  refs 				: 1,
   type 				: 1,
   status 			: 1,
+
+  description : 1,
+
 };
 
 Trx.helpers({

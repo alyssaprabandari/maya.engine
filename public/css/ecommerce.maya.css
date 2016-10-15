@@ -1,0 +1,18 @@
+.navbar-default {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
+
+.jumbotron {
+	background-color: transparent;
+}
+
+@media screen and (min-width: 376px) {
+	.carousel-inner > .item > img {
+		min-width: 100%;
+	}
+}

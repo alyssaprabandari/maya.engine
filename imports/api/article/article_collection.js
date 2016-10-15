@@ -5,7 +5,7 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _ImageSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
-class InfoCollection extends Mongo.Collection {
+class ArticleCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);
     return result;
@@ -17,31 +17,32 @@ class InfoCollection extends Mongo.Collection {
   remove(selector) {
     const result = super.remove(selector);
     return result;
-	}
+  }
 };
 
-export const Info = new InfoCollection('info');
+export const Article = new ArticleCollection('article');
 
 // Deny all client-side updates since we will be using methods to manage this collection
-Info.deny({
+Article.deny({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
 });
 
-Info.schema = new SimpleSchema({
-	title: {
-		type: String,
-		label: 'Info Title',
-	},
+Article.schema = new SimpleSchema({
+  title: {
+    type: String,
+    label: 'Article Title',
+  },
 
-  imgUrl: {
-    type: SimpleSchema.RegEx.Url,
+  images: {
+    type      : [ _ImageSchema ],
+    optional  : true
   },
   
   type: {
     type: String,
-    allowedValues   : [ "Blog", "Headline.Article", "Headline.Product", "FAQ" ], 
+    allowedValues   : [ "Profile.Member", "Profile.Shop" ], 
   },
   status: {
     type: String,
@@ -50,15 +51,15 @@ Info.schema = new SimpleSchema({
 
 });
 
-Info.attachSchema(Info.schema);
-Info.attachSchema(_GeneralSchema);
+Article.attachSchema(Article.schema);
+Article.attachSchema(_GeneralSchema);
 
-Info.publicFields = {
+Article.publicFields = {
   title           : 1,  
 
   type            : 1,
 
-  imgUrl          : 1,
+  images          : 1,
 
   refs            : 1,
   lastModifiedAt  : 1,
@@ -68,6 +69,6 @@ Info.publicFields = {
 
 };
 
-Info.helpers({
+Article.helpers({
 
 });

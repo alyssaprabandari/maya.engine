@@ -3,6 +3,8 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
+import { _GeneralSchema } from '/imports/api/general_schemas';
+
 class ApiCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);    
@@ -33,12 +35,6 @@ Api.schema = new SimpleSchema({
 		label: 'Name of this API',
 	},
 
-  description: {
-    type      : String,
-    label     : "Description",
-    optional  : true
-  },
-
 	type: {
 		type: String,
 	},
@@ -47,23 +43,10 @@ Api.schema = new SimpleSchema({
 		allowedValues   : ["Draft", "Active", "Suspended"],
 	},
 
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
-
 });
 
 Api.attachSchema(Api.schema);
+Api.attachSchema(_GeneralSchema);
 
 Api.publicFields = {
   _id 					: 1,
@@ -72,6 +55,4 @@ Api.publicFields = {
 
   type 					: 1,
   status 				: 1,
-
-  timestamp 		: 1,
 };

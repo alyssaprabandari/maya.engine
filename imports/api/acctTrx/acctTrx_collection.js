@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _RefSchema } from '/imports/api/general_schemas';
+import { _GeneralSchema } from '/imports/api/general_schemas';
 
 import { Acct } from '/imports/api/acct/acct_collection.js';
 
@@ -50,34 +50,11 @@ AcctTrx.schema = new SimpleSchema({
 		allowedValues   : ["Normal", "Adjustment"],
 		defaultValue 	: "Normal",
 	},
-	description: {
-		type: String,
-		optional: true,
-	},
-
-	refs: {
-		type: [ _RefSchema ],
-		optional: true
-	},
-
-	userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
-
 
 });
 
 AcctTrx.attachSchema(AcctTrx.schema);
+AcctTrx.attachSchema(_GeneralSchema);
 
 AcctTrx.publicFields = {
   _id 						: 1,
@@ -88,9 +65,9 @@ AcctTrx.publicFields = {
 
   type 						: 1,
   status 					: 1,
-  description 		: 1,
 
-  timestamp 			: 1,
+  description 		: 1,
+  lastModifiedAt 	: 1,
 };
 
 AcctTrx.helpers({

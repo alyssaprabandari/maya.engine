@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _RefSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 import { Tenant } from '/imports/api/tenant/tenant_collection.js';
 
@@ -36,13 +36,6 @@ Org.schema = new SimpleSchema({
 		type: String,
 		label: 'Organisation Name',
 	},
-  tenantId: {
-    type: SimpleSchema.RegEx.Id,
-  },
-	description: {
-		type: String,
-    optional: true,
-	},
   roles: {
     type: [ String ], //akan jadi role di <org>.<tenant>, misal accounting.maya: Member, Admin
   },
@@ -63,37 +56,18 @@ Org.schema = new SimpleSchema({
     optional  : true
   },
 
-  refs: {
-    type: [ _RefSchema ],
-    optional: true
-  },
-
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
-
-
 });
 
 Org.attachSchema(Org.schema);
+Org.attachSchema(_GeneralSchema);
 
 Org.publicFields = {
   _id         : 1,
   name 			  : 1,
-  description : 1,
   type        : 1,
   status      : 1,
   images      : 1,
+  description : 1,
 };
 
 Org.helpers({

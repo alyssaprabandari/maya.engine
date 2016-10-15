@@ -6,9 +6,10 @@ if(process.env.NODE_ENV === 'development'){
 
 	import { Tenant } from '/imports/api/tenant/tenant_collection';
 	import { Member } from '/imports/api/member/member_collection';
-	import { Info } from '/imports/api/info/info_collection';
 	import { Product } from '/imports/api/product/product_collection';
-
+	import { Article } from '/imports/api/article/article_collection';
+	import { Info } from '/imports/api/info/info_collection';
+	
 	const tenants = [{
 		"domain" 	: "localhost",
 		"name" 		: "Localhost",
@@ -200,7 +201,7 @@ if(process.env.NODE_ENV === 'development'){
 		"status" 								: "Active",
 	},{
 		"domain" 	: "ecommerce.maya",
-		"name" 		: "Maya eCommerce",
+		"name" 		: "maya eCommerce",
 		"email" 	: "info@ecommerce.maya",
 		"layout" : {
 		  "framework" : "Bootstrap",
@@ -729,26 +730,97 @@ if(process.env.NODE_ENV === 'development'){
 	  domain: 'ecommerce.maya'
 	}];
 
-	const infos = [{
-		"title" 				: "Announcement Headline", 
-		"description" 	: "We are currently under Alpha-Phase", 
-		"type" 					: "Headline.Announcement",
+	//FIXME harusnya dari articles otomatis create infos
+	//FIXME save markdown dulu kali yah sementara? atau mau langsung draft.js?
+	const articles = [{
+		"title" 				: "Chef William", 
+		"description" 	: "Once you try it, you will never forget it", 
+		"type" 					: "Profile.Member",
 		"status" 				: "Active",
-	},{
-		"title" 				: "Product Headline", 
-		"description" 	: "Please view the detail of the Product", 
+		"images"				: [{
+			"imgUrl" 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/profile_william.jpg",
+			"imgType" : "Thumbnail"
+		},{
+			"imgUrl" 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/profile_william.jpg",
+			"imgType" : "Detail"
+		},{
+			"imgUrl" 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
+			"imgType" : "Detail"
+		},{
+			"imgUrl" 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
+			"imgType" : "Detail"
+		}],
+		"domain"  			: "ecommerce.maya",
+	}];
+
+	const infos = [{
+		"title" 				: "1900 x 640 Brownies Lezat", 
+		"description" 	: "Once you try it, you will never forget it", 
 		"type" 					: "Headline.Product",
 		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/sample/brownies_1900x640.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "1900 x 750 Brownies Lezat", 
+		"description" 	: "Once you try it, you will never forget it", 
+		"type" 					: "Headline.Product",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/sample/brownies_1900x750.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "1900 x 860 Brownies Lezat", 
+		"description" 	: "Once you try it, you will never forget it", 
+		"type" 					: "Headline.Product",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/sample/brownies_1900x860.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "1900 x 970 Brownies Lezat", 
+		"description" 	: "Once you try it, you will never forget it", 
+		"type" 					: "Headline.Product",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/sample/brownies_1900x970.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "1900 x 1080 Brownies Lezat", 
+		"description" 	: "Once you try it, you will never forget it", 
+		"type" 					: "Headline.Product",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/sample/brownies_1900x1080.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "Chef William", 
+		"description" 	: "Once you try it, you will never forget it", 
+		"type" 					: "Headline.Article",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/profile_william.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "Lezatnya Mie Ijo", 
+		"description" 	: "Siapa bilang tidak ada makanan enak yang sehat", 
+		"type" 					: "Headline.Product",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
+		"domain"  			: "ecommerce.maya",
+	},{
+		"title" 				: "Queen Lanny", 
+		"description" 	: "From Manado with Love", 
+		"type" 					: "Headline.Article",
+		"status" 				: "Active",
+		"imgUrl" 				: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/profile_lanny.jpg",
+		"domain"  			: "ecommerce.maya",
 	},{
 		"title" 				: "First FAQ", 
 		"description" 	: "This is the answer of the first FAQ", 
 		"type" 					: "FAQ",
 		"status" 				: "Active",
+		"domain"  			: "crowdfunding.maya",
 	},{
 		"title" 				: "Second FAQ", 
 		"description" 	: "Hier ist die Antwort von dem zweiten FAQ", 
 		"type" 					: "FAQ",
 		"status" 				: "Active",
+		"domain"  			: "crowdfunding.maya",
 	}];
 
 	const products = [{
@@ -930,21 +1002,53 @@ if(process.env.NODE_ENV === 'development'){
 		Tenant._collection.update({ _id: tenantId }, { $set:{ owners:tenantOwners } });
 		console.log('update Tenant with owners: ', tenantOwners);
 
-		if(Info.find({tenantId:tenantId}).fetch().length < infos.length ){
-			console.log('now injecting info collection...');
-			infos.forEach((info) => {
-				info.tenantId = tenantId;
-				info.imgUrl 	= "http://"+tenant.domain+":3000/images/1900x1080_SlideOne.png";
-				info.owners 	= tenantOwners;
+		// FIXME seharusnya otomatis aja waktu create article, create info juga
+		const tenantArticles = _.where(articles,{domain:tenant.domain});
+		console.log('tenantArticles found in fixtures: ', tenantArticles.length);
 
-				//FIXME harusnya cek type, bila Product, inject juga ke refs, tentunya kita buat data dulu di Product Collection 
+		tenantArticles.forEach((tenantArticle) => {
+			const foundArticle = Article.findOne({title:tenantArticle.title});
+			if(!foundArticle){
+				delete tenantArticle["domain"];
+				tenantArticle.tenantId = tenantId;
+				tenantArticle.owners 	= tenantOwners;
+				console.log('tenantArticle', tenantArticle);
+				const articleId = Article.insert(tenantArticle,{validate:false});
+				console.log('created articleId: ', articleId);
+			};
+		});
 
-				const infoId = Info.insert(info,{ validate: false});
+		// FIXME jadi di sini yang bukan article ditembak masuk ke info
+		const tenantInfos = _.where(infos,{domain:tenant.domain});
+		console.log('tenantInfos found in fixtures: ', tenantInfos.length);
+
+		tenantInfos.forEach((tenantInfo) => {
+			const foundInfo = Info.findOne({title:tenantInfo.title});
+			if(!foundInfo){
+				delete tenantInfo["domain"];
+				tenantInfo.tenantId = tenantId;
+				tenantInfo.owners 	= tenantOwners;
+				console.log('tenantInfo', tenantInfo);
+				const infoId = Info.insert(tenantInfo,{validate:false});
 				console.log('created infoId: ', infoId);
-			});
-		}else{
-			console.log('skipping infos creation...');
-		};
+			};
+		});
+
+		// if(Info.find({tenantId:tenantId}).fetch().length < infos.length ){
+		// 	console.log('now injecting info collection...');
+		// 	infos.forEach((info) => {
+		// 		info.tenantId = tenantId;
+		// 		info.imgUrl 	= "http://"+tenant.domain+":3000/images/1900x1080_SlideOne.png";
+		// 		info.owners 	= tenantOwners;
+
+		// 		//FIXME harusnya cek type, bila Product, inject juga ke refs, tentunya kita buat data dulu di Product Collection 
+
+		// 		const infoId = Info.insert(info,{ validate: false});
+		// 		console.log('created infoId: ', infoId);
+		// 	});
+		// }else{
+		// 	console.log('skipping infos creation...');
+		// };
 
 		const tenantProducts = _.where(products,{domain:tenant.domain});
 		console.log('tenantProducts found in fixtures: ', tenantProducts.length);

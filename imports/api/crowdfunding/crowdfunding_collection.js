@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _PartySchema, _RefSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 class CrowdfundingCollection extends Mongo.Collection {
   insert(doc, callback) {
@@ -57,10 +57,6 @@ Crowdfunding.schema = new SimpleSchema({
     type: String,
     label: 'Name of this Crowdfunding',
   },
-  tenantId: {
-    type: SimpleSchema.RegEx.Id,
-    label: 'tenantId of this Product'
-  },
   
   recipient: {
     type: _PartySchema
@@ -105,21 +101,12 @@ Crowdfunding.schema = new SimpleSchema({
     type      : [ _ImageSchema ],
     optional  : true
   },
-  description: {
-    type      : String,
-    label     : "External Description",
-    optional  : true
-  },
 
   tags: {
     type: [ String ],
     optional: true,
   },  
 
-  sequenceNr: {
-    type: Number,
-    defaultValue: 0
-  },
   type: {
     type: String,
     allowedValues   : [ "Scholarship", "Kickstarter" ], // adjust with business process
@@ -130,33 +117,10 @@ Crowdfunding.schema = new SimpleSchema({
     defaultValue    : "Draft"
   },
 
-  owners: {
-    type: [ _PartySchema ], // useful for marketplace type of crowdfunding, e.g. user can create own crowdfunding
-    optional: true,
-  },
-  refs: {
-    type: [ _RefSchema ],
-    optional: true
-  },
-
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
-
 });
 
-
 Crowdfunding.attachSchema(Crowdfunding.schema);
+Crowdfunding.attachSchema(_GeneralSchema);
 
 Crowdfunding.publicFields = {
   _id           : 1,
@@ -173,13 +137,14 @@ Crowdfunding.publicFields = {
   thruDate      : 1,
   
   images        : 1,
-  description   : 1,
 
   tags          : 1,
 
-  sequenceNr    : 1,
   type          : 1,
   status        : 1,
+
+  description   : 1,
+  sequenceNr    : 1,
 };
 
 Crowdfunding.helpers({

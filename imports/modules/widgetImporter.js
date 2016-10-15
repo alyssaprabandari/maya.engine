@@ -47,6 +47,9 @@ export const widgetImporter = (widget) => {
 				case 'ProductDetail': 
 					import ProductDetail from '/imports/ui/widgets/Bootstrap/ProductDetail/ProductDetail'; return ProductDetail;
 				
+				case 'Coba': 
+					import Coba from '/imports/ui/widgets/Bootstrap/Coba/Coba'; return Coba;
+				
 				default: 
 					import { NotFound } from '/imports/ui/widgets/Bootstrap/NotFound/NotFound'; return NotFound;
 			};

@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _ImageSchema, _RefSchema, _OrgSchema, _TenantSchema } from '/imports/api/general_schemas';
+import { _ImageSchema, _OrgSchema, _TenantSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 import { Acct } from '../acct/acct_collection'
 import { Org } from '../org/org_collection'
@@ -47,11 +47,6 @@ Member.schema = new SimpleSchema({
 		optional: true
 	},
 
-  description: {
-    type: String,
-    label: 'Description',
-    optional: true
-  },
   images: {
     type      : [ _ImageSchema ],
     optional  : true
@@ -64,28 +59,11 @@ Member.schema = new SimpleSchema({
     type: [ _OrgSchema ],
     optional: true
   },
-  refs: {
-    type: [ _RefSchema ],
-    optional: true
-  },
-
-  userId: {
-    type: SimpleSchema.RegEx.Id,
-    autoValue : function(){
-      return this.userId;
-    },
-  },
-  timestamp: {
-    type: Date,
-    label: 'Latest Timestamp',
-    autoValue : function(){
-      return new Date();
-    },
-  },
   
 });
 
 Member.attachSchema(Member.schema);
+Member.attachSchema(_GeneralSchema);
 
 Member.publicFields = {
   _id           : 1,

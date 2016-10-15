@@ -31,5 +31,8 @@ import '/imports/api/trx/server/trx_methods.js';
 import '/imports/api/product/server/product_publications.js';
 import '/imports/api/product/server/product_methods.js';
 
+import '/imports/api/article/server/article_publications.js';
+import '/imports/api/article/server/article_methods.js';
+
 import '/imports/api/info/server/info_publications.js';
 import '/imports/api/info/server/info_methods.js';
