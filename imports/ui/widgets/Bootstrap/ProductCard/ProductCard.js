@@ -27,6 +27,7 @@ const ProductCard = ({products}) => (
         	<Col key={product._id} xs={12} md={4}>
         		<Thumbnail alt="Product Name" src={ productThumbnail(product.images) } onClick={ goLink.bind(this, '/product/'+product._id+'/detail') }>
         			<h3>{ product.name }</h3>
+              <p>{ product.shop().name }</p>
         			<p>{ product.currency } { product.unitPrice.toLocaleString() }</p>
         		</Thumbnail>
         	</Col>

@@ -28,6 +28,9 @@ import '/imports/api/acctMovement/server/acctMovement_methods.js';
 import '/imports/api/trx/server/trx_publications.js';
 import '/imports/api/trx/server/trx_methods.js';
 
+import '/imports/api/shop/server/shop_publications.js';
+import '/imports/api/shop/server/shop_methods.js';
+
 import '/imports/api/product/server/product_publications.js';
 import '/imports/api/product/server/product_methods.js';
 

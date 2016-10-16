@@ -6,9 +6,11 @@ if(process.env.NODE_ENV === 'development'){
 
 	import { Tenant } from '/imports/api/tenant/tenant_collection';
 	import { Member } from '/imports/api/member/member_collection';
-	import { Product } from '/imports/api/product/product_collection';
 	import { Article } from '/imports/api/article/article_collection';
 	import { Info } from '/imports/api/info/info_collection';
+	
+	import { Shop } from '/imports/api/shop/shop_collection';
+	import { Product } from '/imports/api/product/product_collection';
 	
 	const tenants = [{
 		"domain" 	: "localhost",
@@ -728,6 +730,22 @@ if(process.env.NODE_ENV === 'development'){
 	  },
 	  roles: ['Member.Free'],
 	  domain: 'ecommerce.maya'
+	},{
+		email: 'william@ecommerce.maya',
+	  password: 'password',
+	  profile: {
+	    fullname: 'William Setiadi',
+	  },
+	  roles: ['Member.Free', 'Member.Seller'],
+	  domain: 'ecommerce.maya'
+	},{
+		email: 'lanny@ecommerce.maya',
+	  password: 'password',
+	  profile: {
+	    fullname: 'Queen Lanny',
+	  },
+	  roles: ['Member.Free', 'Member.Seller'],
+	  domain: 'ecommerce.maya'
 	}];
 
 	//FIXME harusnya dari articles otomatis create infos
@@ -823,6 +841,52 @@ if(process.env.NODE_ENV === 'development'){
 		"domain"  			: "crowdfunding.maya",
 	}];
 
+	const shops = [{
+		name 				: "Deliciozo",
+		city 				: "Jakarta Pusat",
+		area 				: "Mega Kuningan",
+		address 		: "Jalan coba coba kolang kaling no 21",
+		country 		: "Indonesia",
+		description : "Penjelasan tentang Deliciozo",
+		userEmail 	: "william@ecommerce.maya",
+		type 				: "Food",
+		status 			: "Active",
+		images			: [{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
+		tags 				: [ "Bakmi", "Brownies", "Mie", "Caisim" ], 
+		domain 			: "ecommerce.maya",
+	},{
+		name 				: "Warung Ngana",
+		city 				: "Jakarta Utara",
+		area 				: "Kelapa Gading",
+		address 		: "Jalan Boulevard Raya Sana Sini Blok ABC No. 123",
+		country 		: "Indonesia",
+		description : "Penjelasan tentang Warung Ngana",
+		userEmail 	: "lanny@ecommerce.maya",
+		type 				: "Food",
+		status 			: "Active",
+		images			: [{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
+			imgType : "Thumbnail"
+		},{
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
+			imgType : "Detail"
+		},{
+			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
+			imgType : "Detail"
+		}],
+		tags 				: [ "Manado", "Menado", "Sambel", "Roa" ], 
+		domain 			: "ecommerce.maya",
+	}];
+
 	const products = [{
 		name 				: "Mie Ijo",
 		unitPrice 	: 123456,
@@ -831,7 +895,7 @@ if(process.env.NODE_ENV === 'development'){
 		description : "Penjelasan tentang Mie Ijo",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Deliciozo",
+		shopName 		: "Deliciozo",
 		images			: [{
 			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
 			imgType : "Thumbnail"
@@ -852,7 +916,7 @@ if(process.env.NODE_ENV === 'development'){
 		description : "Penjelasan dari Sambel Roa",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Warung Ngana",
+		shopName 		: "Warung Ngana",
 		images			: [{
 			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
 			imgType : "Thumbnail"
@@ -879,7 +943,7 @@ if(process.env.NODE_ENV === 'development'){
 		description : "Penjelasan dari Ayam Woku",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Warung Ngana",
+		shopName 		: "Warung Ngana",
 		images			: [{
 			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/ayam_woku.jpg",
 			imgType : "Thumbnail"
@@ -900,7 +964,7 @@ if(process.env.NODE_ENV === 'development'){
 		description : "Penjelasan tentang Brownies rasa Coklat",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Deliciozo",
+		shopName 		: "Deliciozo",
 		sku 				: "Brownies-Coklat-001",
 		images			: [{
 			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
@@ -922,7 +986,7 @@ if(process.env.NODE_ENV === 'development'){
 		description : "Penjelasan tentang Brownies rasa Keju",
 		type 				: "Physical",
 		status 			: "Active",
-		brand 			: "Deliciozo",
+		shopName 		: "Deliciozo",
 		sku 				: "Brownies-Keju-001",
 		images			: [{
 			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/brownies.jpg",
@@ -1050,6 +1114,27 @@ if(process.env.NODE_ENV === 'development'){
 		// 	console.log('skipping infos creation...');
 		// };
 
+		const tenantShops = _.where(shops,{domain:tenant.domain});
+		console.log('tenantShops found in fixtures: ', tenantShops.length);
+
+		tenantShops.forEach((tenantShop) => {
+			const foundShop = Shop.findOne({name:tenantShop.name});
+			if(!foundShop){
+				delete tenantShop["domain"];
+				tenantShop.tenantId = tenantId;
+
+				const userExists = Meteor.users.findOne({ 'emails.address': tenantShop.userEmail });
+				if(!!userExists){
+					tenantShop.owners = [{
+						partyId: userExists._id
+					}];
+					console.log('tenantShop', tenantShop);
+					const shopId = Shop.insert(tenantShop,{validate:false});
+					console.log('created shopId: ', shopId);
+				};
+			};
+		});
+
 		const tenantProducts = _.where(products,{domain:tenant.domain});
 		console.log('tenantProducts found in fixtures: ', tenantProducts.length);
 
@@ -1058,9 +1143,14 @@ if(process.env.NODE_ENV === 'development'){
 			if(!foundProduct){
 				delete tenantProduct["domain"];
 				tenantProduct.tenantId = tenantId;
-				console.log('tenantProduct', tenantProduct);
-				const productId = Product.insert(tenantProduct,{validate:false});
-				console.log('created productId: ', productId);
+
+				const shop = Shop.findOne({name:tenantProduct.shopName});
+				if(!!shop){
+					tenantProduct.shopId = shop._id;
+					console.log('tenantProduct', tenantProduct);
+					const productId = Product.insert(tenantProduct,{validate:false});
+					console.log('created productId: ', productId);
+				};
 			};
 		});
 		

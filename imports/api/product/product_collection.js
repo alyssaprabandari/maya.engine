@@ -5,6 +5,8 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _ImageSchema, _GeneralSchema } from '/imports/api/general_schemas';
 
+import { Shop } from '/imports/api/shop/shop_collection.js';
+
 class ProductCollection extends Mongo.Collection {
   insert(doc, callback) {
     const result = super.insert(doc, callback);    
@@ -34,6 +36,10 @@ Product.schema = new SimpleSchema({
 		type: String,
 		label: 'Name of this Product',
 	},
+
+  shopId: {
+    type: SimpleSchema.RegEx.Id,
+  },
   
   unitPrice: {
     type: Number,
@@ -54,14 +60,14 @@ Product.schema = new SimpleSchema({
     optional  : true
   },
 
-  brand: {
-    type: String,
-    optional: true,
-  },
-  brandType: {
-    type: String,
-    optional: true,
-  },
+  // brand: {
+  //   type: String,
+  //   optional: true,
+  // },
+  // brandType: {
+  //   type: String,
+  //   optional: true,
+  // },
 
   sku: {
     type: String,
@@ -103,14 +109,16 @@ Product.publicFields = {
   _id           : 1,
   name          : 1,
   
+  shopId        : 1,
+  
   unitPrice     : 1,
   currency      : 1,
   uom           : 1,
 
   images        : 1,
 
-  brand					: 1,
-  brandType			: 1,
+  // brand					: 1,
+  // brandType			: 1,
   sku           : 1,
   barcode       : 1,
   
@@ -124,6 +132,8 @@ Product.publicFields = {
 };
 
 Product.helpers({
-
+  shop() {
+    return Shop.findOne(this.shopId);
+  },
 });
 

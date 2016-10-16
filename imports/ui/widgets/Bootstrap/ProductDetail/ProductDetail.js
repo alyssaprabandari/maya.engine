@@ -26,7 +26,7 @@ const ProductDetail = ({product}) => {
 	      	</Col>
 	        <Col xs={12} md={4}>
 	          <h3>{ product.name }</h3>
-	          <p>{ product.brand } - { product.sku }</p>
+	          <p>{ product.shop()?product.shop().name : '' }</p>
 	          <p>{ product.currency } { product.unitPrice.toLocaleString() }</p>
 	          <p>{ product.description }</p>
 	          <Button bsStyle="primary">Buy Now</Button>

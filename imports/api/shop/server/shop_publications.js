@@ -2,27 +2,25 @@ import { Meteor } from 'meteor/meteor';
 
 import { initAPIsToDB, isUserHasAccess, constructSearchQuery } from '/imports/api/general/server/general_server_functions';
 
-import { Product } from '/imports/api/product/product_collection.js';
-
 import { Shop } from '/imports/api/shop/shop_collection.js';
 
-const apiType = 'Product.Publication';
+const apiType = 'Shop.Publication';
 const APIs = {
-  listAllProduct: {
-    name          : 'listAllProduct',
-    description   : 'List all Product that current User has access',
+  listAllShop: {
+    name          : 'listAllShop',
+    description   : 'List all Shop that current User has access',
     type          : apiType,
     status        : 'Active',
   },
-  listActiveProduct: {
-    name          : 'listActiveProduct',
-    description   : 'List all Product with Active as status',
+  listActiveShop: {
+    name          : 'listActiveShop',
+    description   : 'List all Shop with Active as status',
     type          : apiType,
     status        : 'Active',
   },
-  detailProduct: {
-    name          : 'detailProduct',
-    description   : 'Product Detail',
+  detailShop: {
+    name          : 'detailShop',
+    description   : 'Shop Detail',
     type          : apiType,
     status        : 'Active',
   },
@@ -30,10 +28,10 @@ const APIs = {
 
 initAPIsToDB(APIs, apiType);
 
-const searchFieldNames = ['name','unitPrice','currency','uom','description','brand','brandType','tags','type'];
+const searchFieldNames = ['name','city','area','address','description','tags','type'];
 
-Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
-  const apiName = APIs.listAllProduct.name;
+Meteor.publishComposite(APIs.listAllShop.name, function(searchText, limit) {
+  const apiName = APIs.listAllShop.name;
   try{
     check(limit, Number);
     check(searchText, Match.Maybe(String));
@@ -44,7 +42,7 @@ Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
     const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
         
     return {
-      find(){
+      find() {
         const querySearch = constructSearchQuery(searchFieldNames,searchText);
         const query = { 
           $and:[
@@ -56,19 +54,14 @@ Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
           ]
         };
         const options = {
-          fields: Product.publicFields, //FIXME adjust sesuai kebutuhan
+          fields: Shop.publicFields, //FIXME adjust sesuai kebutuhan
           sort: {
             sequenceNr        : 1,
             lastModifiedAt    : -1
           }
         };
-        return Product.find(query,options);
+        return Shop.find(query,options);
       },
-      children: [{
-        find(product) {
-          return Shop.find({ _id: product.shopId });
-        }
-      }],
     };
   }catch(exception){
     console.log('EXCEPTION - '+apiName+' - '+apiType+' - userId: '+this.userId, exception);
@@ -76,8 +69,8 @@ Meteor.publishComposite(APIs.listAllProduct.name, function(searchText, limit) {
   }
 });
 
-Meteor.publishComposite(APIs.listActiveProduct.name, function(searchText, limit) {
-  const apiName = APIs.listActiveProduct.name;
+Meteor.publishComposite(APIs.listActiveShop.name, function(searchText, limit) {
+  const apiName = APIs.listActiveShop.name;
   try{
     check(limit, Number);
     check(searchText, Match.Maybe(String));
@@ -88,7 +81,7 @@ Meteor.publishComposite(APIs.listActiveProduct.name, function(searchText, limit)
     const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
         
     return {
-      find(){
+      find() {
         const querySearch = constructSearchQuery(searchFieldNames,searchText);        
         const query = { 
           $and:[
@@ -99,19 +92,14 @@ Meteor.publishComposite(APIs.listActiveProduct.name, function(searchText, limit)
           ]
         };
         const options = {
-          fields: Product.publicFields, //FIXME adjust sesuai kebutuhan
+          fields: Shop.publicFields, //FIXME adjust sesuai kebutuhan
           sort: {
             sequenceNr        : 1,
             lastModifiedAt    : -1
           }
         };
-        return Product.find(query,options);
+        return Shop.find(query,options);
       },
-      children: [{
-        find(product) {
-          return Shop.find({ _id: product.shopId });
-        }
-      }],
     };
   }catch(exception){
     console.log('EXCEPTION - '+apiName+' - '+apiType+' - userId: '+this.userId, exception);
@@ -119,29 +107,23 @@ Meteor.publishComposite(APIs.listActiveProduct.name, function(searchText, limit)
   }
 });
 
-Meteor.publishComposite(APIs.detailProduct.name, function(productId) {
-  const apiName = APIs.detailProduct.name;
+Meteor.publishComposite(APIs.detailShop.name, function(shopId) {
+  const apiName = APIs.detailShop.name;
   try{
-    check(productId, Match._id);
+    check(shopId, Match._id);
     
     const tenantId = isUserHasAccess(this.userId, this.connection, apiName, apiType);
         
     return {
-      find(){
+      find() {
         const query = { 
-          _id: productId,
-          status: 'Active'
+          _id: shopId
         };
         const options = {
-          fields: Product.publicFields,
+          fields: Shop.publicFields,
         };
-        return Product.find(query,options);
+        return Shop.find(query,options);
       },
-      children: [{
-        find(product) {
-          return Shop.find({ _id: product.shopId });
-        }
-      }],
     };
   }catch(exception){
     console.log('EXCEPTION - '+apiName+' - '+apiType+' - userId: '+this.userId, exception);
