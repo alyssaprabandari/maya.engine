@@ -177,7 +177,7 @@ export const _GeneralSchema = new SimpleSchema({
     },
   },
 
-  updatesHistory: {
+  updateHistories: {
     type: Array,
     optional: true,
     autoValue: function() {
@@ -196,13 +196,13 @@ export const _GeneralSchema = new SimpleSchema({
       }
     }
   },
-  'updatesHistory.$': {
+  'updateHistories.$': {
     type: Object,
   },
-  'updatesHistory.$.userId': {
+  'updateHistories.$.userId': {
     type: SimpleSchema.RegEx.Id,
   },
-  'updatesHistory.$.timestamp': {
+  'updateHistories.$.timestamp': {
     type: Date,
   },
 })

@@ -4,9 +4,23 @@ import { composeWithTracker } from 'react-komposer';
 import React from 'react';
 
 import { Loading } from '/imports/ui/widgets/Bootstrap/Loading/Loading.js';
-import { Grid, Row, Col, Image, Thumbnail, Button, Alert } from 'react-bootstrap';
+import { Grid, Row, Col, Image, Thumbnail, Button, Alert, FormGroup, InputGroup, FormControl } from 'react-bootstrap';
+
+import { goLink } from '/imports/modules/utils';
 
 import { Product } from '/imports/api/product/product_collection';
+
+const buyProduct = (productId, event) => {
+  const qty = document.getElementById("qty").value;
+  console.log(qty);
+  console.log('productId',productId);
+
+  // FIXME now call meteor method to create open trx
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+};
 
 const ProductDetail = ({product}) => {
 	if(!!product){
@@ -26,10 +40,18 @@ const ProductDetail = ({product}) => {
 	      	</Col>
 	        <Col xs={12} md={4}>
 	          <h3>{ product.name }</h3>
-	          <p>{ product.shop()?product.shop().name : '' }</p>
+	          <p onClick={ goLink.bind(this, '/shop/'+product.shop()._id) }>{ product.shop()?product.shop().name : '' }</p>
 	          <p>{ product.currency } { product.unitPrice.toLocaleString() }</p>
 	          <p>{ product.description }</p>
-	          <Button bsStyle="primary">Buy Now</Button>
+	          <form onSubmit={ handleSubmit.bind(this) }>
+		          <FormGroup validationState="success">
+					      <InputGroup>
+					        <FormControl id="qty" type="number" defaultValue={ 1 } />
+					        <InputGroup.Addon>{ product.uom }</InputGroup.Addon>
+					      </InputGroup>
+					    </FormGroup>
+	          	<Button bsStyle="success" onClick={ buyProduct.bind(this, product._id) } >Buy Now</Button>
+	          </form>
 	          <p>&nbsp;</p>
 	        </Col>
 	      </Row>

@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { _RefSchema, _GeneralSchema } from '/imports/api/general_schemas';
+import { _RefSchema, _PartySchema, _GeneralSchema } from '/imports/api/general_schemas';
 
 class TrxCollection extends Mongo.Collection {
 	insert(doc, callback) {
@@ -93,7 +93,14 @@ Trx.schema = new SimpleSchema({
 		label: 'Custom Numbering of Transaction, if needed',
 		optional: true,
 	},
-		
+	
+  buyer: {
+    type: _PartySchema,
+  },
+  shopId: {
+    type: SimpleSchema.RegEx.Id,
+  },
+
 	trxItems: {
 		type: [ _TrxItemSchema ],
 		label: 'Transaction Items',
@@ -109,13 +116,24 @@ Trx.schema = new SimpleSchema({
 		allowedValues   : ['IDR', 'USD', 'EUR'],
 	},
 
+  RDT: {
+    type: Date,
+    label: "Request Delivery Time",
+    optional: true
+  },
+  ADT: {
+    type: Date,
+    label: "Actual Delivery Time",
+    optional: true
+  },
+
 	type: {
 		type: String,
- 		allowedValues   : ['Sales', 'Sales.Refund', 'Inventory', 'Inventory.Retur', 'Crowdfunding', 'Crowdfunding.Refund'],
+ 		allowedValues   : ['Sales.Trx', 'Sales.Refund', 'Inventory.Trx', 'Inventory.Retur', 'Crowdfunding', 'Crowdfunding.Refund'],
 	},
 	status: {
 		type: String,
-		allowedValues   : ['Open', 'Paid', 'Cancel', 'Void', 'Closed'], //Cancel is by client and no refund, void is by us and must refund
+		allowedValues   : ['Open', 'Waiting for Payment', 'Paid by Transfer', 'Paid by Credit Card', 'Cancel', 'Void', 'Closed'], //adjust to business process, e.g. Cancel is by client and no refund, void is by us and must refund
 	},
 
 });
@@ -126,6 +144,7 @@ Trx.attachSchema(_GeneralSchema);
 Trx.publicFields = {
   _id 				: 1,
   name 				: 1,
+  shopId      : 1,
   trxItems 		: 1,
   total 			: 1,
   currency		: 1,

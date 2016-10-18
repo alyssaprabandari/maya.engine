@@ -60,14 +60,14 @@ Product.schema = new SimpleSchema({
     optional  : true
   },
 
-  // brand: {
-  //   type: String,
-  //   optional: true,
-  // },
-  // brandType: {
-  //   type: String,
-  //   optional: true,
-  // },
+  brand: {
+    type: String,
+    optional: true,
+  },
+  brandType: {
+    type: String,
+    optional: true,
+  },
 
   sku: {
     type: String,
@@ -75,6 +75,11 @@ Product.schema = new SimpleSchema({
   },
   barcode: {
     type: String,
+    optional: true,
+  },
+
+  latency: {
+    type: Number, // adjust to business process, e.g. in Hours or Days
     optional: true,
   },
 
@@ -92,7 +97,7 @@ Product.schema = new SimpleSchema({
   },
   status: {
     type: String,
-    allowedValues   : ["Draft", "Active", "Expired"],
+    allowedValues   : ["Draft", "Active", "Suspended"],
     defaultValue    : "Draft"
   },
 
@@ -117,11 +122,14 @@ Product.publicFields = {
 
   images        : 1,
 
-  // brand					: 1,
-  // brandType			: 1,
+  brand					: 1,
+  brandType			: 1,
+  
   sku           : 1,
   barcode       : 1,
   
+  latency       : 1,
+
   tags					: 1,
 
   type          : 1,

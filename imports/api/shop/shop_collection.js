@@ -83,7 +83,7 @@ Shop.schema = new SimpleSchema({
   },
   status: {
     type: String,
-    allowedValues   : ["Draft", "Active", "Expired"],
+    allowedValues   : ["Draft", "Active", "Suspended"],
     defaultValue    : "Draft"
   },
 
