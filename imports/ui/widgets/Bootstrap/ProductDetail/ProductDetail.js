@@ -75,7 +75,7 @@ const ProductDetail = ({product}) => {
 const composer = (props, onData) => {
   const subscription = Meteor.subscribe('detailProduct',props.params.productId);
   if (subscription.ready()){
-    const product = Product.findOne();
+    const product = Product.findOne({_id:props.params.productId});
     onData(null, { product });
   }  
 };

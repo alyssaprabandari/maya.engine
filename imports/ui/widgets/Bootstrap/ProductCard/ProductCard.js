@@ -25,7 +25,7 @@ const ProductCard = ({products}) => (
   		<Row>
         { products.map( (product) => (
         	<Col key={product._id} xs={12} md={4}>
-        		<Thumbnail alt="Product Name" src={ productThumbnail(product.images) } onClick={ goLink.bind(this, '/product/'+product._id+'/detail') }>
+        		<Thumbnail alt="Product Name" src={ productThumbnail(product.images) } onClick={ goLink.bind(this, '/product/'+product._id) }>
         			<h3>{ product.name }</h3>
               <p>{ product.shop().name }</p>
         			<p>{ product.currency } { product.unitPrice.toLocaleString() }</p>
@@ -38,7 +38,7 @@ const ProductCard = ({products}) => (
 );
 
 const composer = (props, onData) => {
-  const subscription = Meteor.subscribe('listActiveProduct',Session.get('searchText'),10);
+  const subscription = Meteor.subscribe('listActiveProduct',Session.get('searchText'),10); //FIXME make infinite scroll
   if (subscription.ready()){
     const products = Product.find().fetch();
     onData(null, { products: products });

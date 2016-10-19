@@ -51,6 +51,42 @@ Shop.schema = new SimpleSchema({
     type      : String, // e.g. Indonesia
   },
 
+  currency: {
+    type: String,
+    allowedValues   : ["IDR", "USD", "EUR"],
+    defaultValue    : "IDR"
+  },
+  minAmount: {
+    type: Number,
+    decimal: true,
+    defaultValue: 0
+  },
+  eloRating: {
+    type: Number,
+    defaultValue: 1000
+  },
+
+  viewCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  userCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  trxCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  qtyCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  amountCount: {
+    type: Number,
+    defaultValue: 0
+  },
+
   latitude: {
     type: Number,
     decimal: true,
@@ -100,6 +136,11 @@ Shop.publicFields = {
   area          : 1,
   address       : 1,
   country       : 1,
+
+  currency      : 1,
+  minAmount     : 1,
+  eloRating     : 1,
+  viewCount     : 1,
 
   latitude      : 1,
   longitude     : 1,

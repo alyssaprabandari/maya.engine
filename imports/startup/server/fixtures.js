@@ -267,6 +267,14 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" : [],
 		    "type" 	: "Info.Publication"
 		  },{
+		    "name" 	: "listActiveShop",
+		    "roles" : [],
+		    "type" 	: "Shop.Publication"
+		  },{
+		    "name" 	: "detailShop",
+		    "roles" : [],
+		    "type" 	: "Shop.Publication"
+		  },{
 		    "name" 	: "insertProduct",
 		    "roles" : ["Admin", "Internal.Ops"],
 		    "type" 	: "Product.Method"
@@ -349,10 +357,31 @@ if(process.env.NODE_ENV === 'development'){
 		  }, 
 		  {
 		    "title" 	: "Product Detail",
-		    "path" 		: "/product/:productId/detail",
+		    "path" 		: "/product/:productId",
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "ProductDetail",
+		      "Footer"
+		    ],
+		  }, 
+		  {
+		    "title" 	: "Shops",
+		    "path" 		: "/shops",
+		    "widgets" : [ 
+		      "AppNavigation", 
+		      "SearchForm",
+		      "ShopCard",
+		      "Footer"
+		    ],
+		    "menuNr" 	: 2
+		  }, 
+		  {
+		    "title" 	: "Shop Detail",
+		    "path" 		: "/shop/:shopId",
+		    "widgets" : [ 
+		      "AppNavigation", 
+		      "ShopDetail",
+		      "ProductCard",
 		      "Footer"
 		    ],
 		  }, 
@@ -852,16 +881,16 @@ if(process.env.NODE_ENV === 'development'){
 		type 				: "Food",
 		status 			: "Active",
 		images			: [{
-			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/profile_william.jpg",
 			imgType : "Thumbnail"
 		},{
-			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/mie_ijo.jpg",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/deliciozo/profile_william.jpg",
 			imgType : "Detail"
 		},{
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Bakmi", "Brownies", "Mie", "Caisim" ], 
+		tags 				: [ "Bakmi", "Brownies", "Mie", "Caisim", "William" ], 
 		domain 			: "ecommerce.maya",
 	},{
 		name 				: "Warung Ngana",
@@ -874,16 +903,16 @@ if(process.env.NODE_ENV === 'development'){
 		type 				: "Food",
 		status 			: "Active",
 		images			: [{
-			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/profile_lanny.jpg",
 			imgType : "Thumbnail"
 		},{
-			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/roa.jpg",
+			imgUrl 	: "http://www.backtokimi.com.s3.amazonaws.com/images/warungngana/profile_lanny.jpg",
 			imgType : "Detail"
 		},{
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Manado", "Menado", "Sambel", "Roa" ], 
+		tags 				: [ "Manado", "Menado", "Sambel", "Roa", "Lanny" ], 
 		domain 			: "ecommerce.maya",
 	}];
 
@@ -907,7 +936,7 @@ if(process.env.NODE_ENV === 'development'){
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Bakmi", "Mi", "Mie", "Caisim" ], 
+		tags 				: [ "Bakmi", "Mi", "Mie", "Caisim", "Deliciozo" ], 
 		domain 			: "ecommerce.maya",
 	},{
 		name 				: "Sambel Roa",
@@ -935,7 +964,7 @@ if(process.env.NODE_ENV === 'development'){
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Sambel", "Sambal", "Roa", "Menado", "Manado" ], 
+		tags 				: [ "Sambel", "Sambal", "Roa", "Menado", "Manado", "Warung Ngana" ], 
 		domain 			: "ecommerce.maya",
 	},{
 		name 				: "Ayam Woku",
@@ -957,7 +986,7 @@ if(process.env.NODE_ENV === 'development'){
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Ayam", "Woku", "Menado", "Manado" ], 
+		tags 				: [ "Ayam", "Woku", "Menado", "Manado", "Warung Ngana" ], 
 		domain 			: "ecommerce.maya",
 	},{
 		name 				: "Brownies Coklat",
@@ -980,7 +1009,7 @@ if(process.env.NODE_ENV === 'development'){
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Brownies", "Coklat", "Kue" ],
+		tags 				: [ "Brownies", "Coklat", "Kue", "Deliciozo" ],
 		domain 			: "ecommerce.maya",
 	},{
 		name 				: "Brownies Keju",
@@ -1003,7 +1032,7 @@ if(process.env.NODE_ENV === 'development'){
 			imgUrl 	: "http://ecommerce.maya:3000/images/750x500.png",
 			imgType : "Detail"
 		}],
-		tags 				: [ "Brownies", "Keju", "Kue" ],
+		tags 				: [ "Brownies", "Keju", "Kue", "Deliciozo" ],
 		domain 			: "ecommerce.maya",
 	}];
 

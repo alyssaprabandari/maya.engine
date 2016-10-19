@@ -11,8 +11,14 @@
 	background-color: transparent;
 }
 
+.shopDetail > img {
+  /*margin: 0 auto;*/
+  min-width: 100%;
+}
+
 @media screen and (min-width: 376px) {
 	.carousel-inner > .item > img {
 		min-width: 100%;
 	}
 }
+

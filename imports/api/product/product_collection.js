@@ -55,6 +55,37 @@ Product.schema = new SimpleSchema({
     type: String,
   },
 
+  minQty: {
+    type: Number,
+    decimal: true,
+    defaultValue: 1
+  },
+  eloRating: {
+    type: Number,
+    defaultValue: 1000
+  },
+
+  viewCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  userCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  trxCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  qtyCount: {
+    type: Number,
+    defaultValue: 0
+  },
+  amountCount: {
+    type: Number,
+    defaultValue: 0
+  },
+
   images: {
     type      : [ _ImageSchema ],
     optional  : true
@@ -120,17 +151,25 @@ Product.publicFields = {
   currency      : 1,
   uom           : 1,
 
+  minQty        : 1,
+  eloRating     : 1,
+  viewCount     : 1,
+  userCount     : 1,
+  trxCount      : 1,
+  qtyCount      : 1,
+  amountCount   : 1,
+
   images        : 1,
 
-  brand					: 1,
-  brandType			: 1,
+  brand 				: 1,
+  brandType 		: 1,
   
   sku           : 1,
   barcode       : 1,
   
   latency       : 1,
 
-  tags					: 1,
+  tags 					: 1,
 
   type          : 1,
   status        : 1,
