@@ -106,6 +106,8 @@ export class Login extends React.Component {
               />
             </FormGroup>
             <Button type="submit" bsStyle="success">Login</Button>
+            <br/><br/>
+            <p>Don't have an account? <Link to="/signup">Sign Up</Link>.</p>
           </form>
         </Col>
       </Row>

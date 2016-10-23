@@ -427,6 +427,19 @@ if(process.env.NODE_ENV === 'development'){
 		    "menuNr" 	: 3
 		  }, 
 		  {
+		    "title" 	: "Cart",
+		    "path" 		: "/cart",
+		    "roles" 	: [
+		    	"Member.Free"
+		    ],
+		    "widgets" : [ 
+		      "AppNavigation", 
+		      "Cart",
+		      "Footer"
+		    ],
+		    "menuNr" 	: 4
+		  }, 
+		  {
 		    "title" 	: "Ops",
 		    "path" 		: "/ops",
 		    "roles" 	: [ 
@@ -437,7 +450,7 @@ if(process.env.NODE_ENV === 'development'){
 		      "Documents",
 		      "Footer"
 		    ],
-		    "menuNr" 	: 4
+		    "menuNr" 	: 5
 		  }
 		],
 		"isPublicMenuInAuthNav" : true,

@@ -51,7 +51,10 @@ export const widgetImporter = (widget) => {
 					import ShopCard from '/imports/ui/widgets/Bootstrap/ShopCard/ShopCard'; return ShopCard;
 				case 'ShopDetail': 
 					import ShopDetail from '/imports/ui/widgets/Bootstrap/ShopDetail/ShopDetail'; return ShopDetail;
-				
+
+				case 'Cart': 
+					import { Cart } from '/imports/ui/widgets/Bootstrap/Cart/Cart'; return Cart;
+								
 
 				case 'Coba': 
 					import Coba from '/imports/ui/widgets/Bootstrap/Coba/Coba'; return Coba;
