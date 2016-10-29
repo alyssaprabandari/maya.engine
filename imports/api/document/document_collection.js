@@ -1,4 +1,4 @@
-import faker from 'faker';
+// import faker from 'faker';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
@@ -28,6 +28,6 @@ Document.schema = new SimpleSchema({
 
 Document.attachSchema(Document.schema);
 
-Factory.define('document', Document, {
-  title: () => faker.hacker.phrase(),
-});
+// Factory.define('document', Document, {
+//   title: () => faker.hacker.phrase(),
+// });

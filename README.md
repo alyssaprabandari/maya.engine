@@ -45,5 +45,5 @@ ecommerce.maya:3000
 crowdfunding.maya:3000
 ```
 
-Boilerplate based on version 4.7.0 of [`Meteor Chef Base`](https://themeteorchef.com/base) and [`Meteor`](https://www.meteor.com) version 1.4.1.2
+Boilerplate based on version 4.7.0 of [`Meteor Chef Base`](https://themeteorchef.com/base) and [`Meteor`](https://www.meteor.com) version 1.4.2
 
