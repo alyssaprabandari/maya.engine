@@ -49,7 +49,6 @@ const _TrxItemSchema = new SimpleSchema({
   currency: {
     type: String,
     allowedValues   : ["IDR", "USD", "EUR"],
-    defaultValue    : "IDR"
   },
   uom: {
     type: String,
@@ -129,7 +128,7 @@ Trx.schema = new SimpleSchema({
 
 	type: {
 		type: String,
- 		allowedValues   : ['Sales.Trx', 'Sales.Refund', 'Inventory.Trx', 'Inventory.Retur', 'Crowdfunding', 'Crowdfunding.Refund'],
+ 		allowedValues   : ['Sales', 'Sales.Refund', 'Inventory', 'Inventory.Retur', 'Crowdfunding', 'Crowdfunding.Refund', 'Auction'],
 	},
 	status: {
 		type: String,
