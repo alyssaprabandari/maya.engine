@@ -59,6 +59,7 @@ export const memberSignup = new ValidatedMethod({
         _id       : this.userId,
         fullname  : newUser.profile.fullname,
         nickname  : newUser.profile.fullname,
+        tenantId  : tenant._id,
         tenants   : [{
           tenantId  : tenant._id,
           roles     : [ tenant.standardRole ],

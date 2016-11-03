@@ -10,12 +10,13 @@ import { goLink } from '/imports/modules/utils';
 
 import { Product } from '/imports/api/product/product_collection';
 
-const buyProduct = (productId, event) => {
+const buyProduct = (productId, shopId, event) => {
   const qty = document.getElementById("qty").value;
-  console.log(qty);
+  console.log('shopId',shopId);
   console.log('productId',productId);
+  console.log('qty',qty);
 
-  // FIXME now call meteor method to create open trx
+  // FIXME now call meteor method to create/update open trx
 };
 
 const handleSubmit = (event) => {
@@ -50,7 +51,7 @@ const ProductDetail = ({product}) => {
 					        <InputGroup.Addon>{ product.uom }</InputGroup.Addon>
 					      </InputGroup>
 					    </FormGroup>
-	          	<Button bsStyle="success" onClick={ buyProduct.bind(this, product._id) } >Buy Now</Button>
+	          	<Button bsStyle="success" onClick={ buyProduct.bind(this, product._id, product.shopId) } >Buy Now</Button>
 	          </form>
 	          <p>&nbsp;</p>
 	        </Col>
