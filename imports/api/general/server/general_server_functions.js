@@ -49,7 +49,11 @@ export const checkTenant = (doc) => {
 export const getCurrentUserRootDomain = (connection) => {
   const rootDomainWithPort = connection.httpHeaders.host.substring(connection.httpHeaders.host.lastIndexOf(".", connection.httpHeaders.host.lastIndexOf(".") - 1) + 1);
   const indexPort = rootDomainWithPort.indexOf(':');
-  return indexPort > 0?rootDomainWithPort.substring(0, indexPort):rootDomainWithPort;
+  
+  if(!!Meteor.settings.public.tenant)
+    return Meteor.settings.public.tenant;
+  else
+    return indexPort > 0?rootDomainWithPort.substring(0, indexPort):rootDomainWithPort;
 };
 
 export const isUserHasAccess = (userId, connection, apiName, apiType) => {
