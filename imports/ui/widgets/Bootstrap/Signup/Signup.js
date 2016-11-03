@@ -35,9 +35,15 @@ const signUp = () => {
           Meteor.logout();
           Bert.alert(error.message+', please contact helpdesk of '+Meteor.settings.public.tenant,'danger');
         }else{
-          Meteor.call('sendVerificationEmail');
+          // Meteor.call('sendVerificationEmail');
           Bert.alert('Welcome!', 'success');
-          browserHistory.push('/');
+          const nextPathname = Session.get('nextPathname');
+          if (!!nextPathname) {
+            Session.delete('nextPathname');
+            browserHistory.push(nextPathname);
+          } else {
+            browserHistory.push('/');
+          };
         };
       });
     };

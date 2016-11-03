@@ -27,6 +27,7 @@ const login = () => {
           Bert.alert(error.message+', please contact helpdesk of '+Meteor.settings.public.tenant,'danger');
         }else{
           Bert.alert('Logged in!', 'success');
+          Session.delete('nextPathname');
           const { location } = component.props;
           if (location.state && location.state.nextPathname) {
             browserHistory.push(location.state.nextPathname);
@@ -68,10 +69,13 @@ const handleLogin = (options) => {
   validate();
 };
 
-
 export class Login extends React.Component {
   componentDidMount() {
     handleLogin({ component: this });
+    if (this.props.location.state && this.props.location.state.nextPathname)
+    	Session.set('nextPathname', this.props.location.state.nextPathname);
+    else
+    	Session.delete('nextPathname');
   }
 
   handleSubmit(event) {
