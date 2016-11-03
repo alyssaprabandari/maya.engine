@@ -290,6 +290,10 @@ if(process.env.NODE_ENV === 'development'){
 		    "name" 	: "detailProduct",
 		    "roles" : [],
 		    "type" 	: "Product.Publication"
+		  },{
+		    "name" 	: "putProductToCart",
+		    "roles" : ["Member.Free"],
+		    "type" 	: "Trx.Method"
 		  }
 		],
 		"index" : {
