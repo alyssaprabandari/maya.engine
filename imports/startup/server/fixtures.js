@@ -358,6 +358,9 @@ if(process.env.NODE_ENV === 'development'){
 		  {
 		    "title" 	: "Product Detail",
 		    "path" 		: "/product/:productId",
+		    "roles" 	: [ 
+		      "Member.Free"
+		    ],
 		    "widgets" : [ 
 		      "AppNavigation", 
 		      "ProductDetail",
