@@ -27,6 +27,11 @@
 464 - Shop not Found
 466 - Shop not match with Tenant
 
+474 - Trx not Found
+475 - TrxItem not Found
+476 - Trx not match with Tenant
+
+
 481 - Account Transaction may not be updated
 482 - Account Transaction may not be deleted
 483 - Account Movement may not be updated

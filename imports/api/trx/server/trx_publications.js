@@ -50,12 +50,7 @@ Meteor.publishComposite(APIs.listCart.name, function() {
             lastModifiedAt    : -1
           }
         };
-
-        let trxs = Trx.find(query,options);
-
-        console.log(trxs.fetch());
-
-        return trxs;
+        return Trx.find(query,options);
       },
       children: [{
         find(trx) {
