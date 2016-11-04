@@ -294,6 +294,10 @@ if(process.env.NODE_ENV === 'development'){
 		    "name" 	: "putProductToCart",
 		    "roles" : ["Member.Free"],
 		    "type" 	: "Trx.Method"
+		  },{
+		    "name" 	: "listCart",
+		    "roles" : ["Member.Free"],
+		    "type" 	: "Trx.Publication"
 		  }
 		],
 		"index" : {

@@ -22,7 +22,7 @@ const APIs = {
   },
   detailProduct: {
     name          : 'detailProduct',
-    description   : 'Product Detail',
+    description   : 'Product Detail with Active as status',
     type          : apiType,
     status        : 'Active',
   },
