@@ -97,12 +97,9 @@ export const putProductToCart = new ValidatedMethod({
 				trxId = Trx.insert(trx);
 
       }else{
-      	console.log('ada, trxId:', trx._id);
-
       	const trxItem = _.findWhere(trx.trxItems,{productId:product._id});
 
       	if(!trxItem){
-      		console.log('gak ada trxItem sama');
       		const subTotal = product.unitPrice * qty;
 
 	      	const trxItem = {
@@ -126,7 +123,6 @@ export const putProductToCart = new ValidatedMethod({
       		);
 
       	}else{
-      		console.log('ada trxItem sama');
       		if(trxItem.qty !== qty){
       			const subTotalNew = product.unitPrice * qty;
       			const subTotalOld = trxItem.subTotal;

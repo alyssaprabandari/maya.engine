@@ -10,15 +10,9 @@ import { goLink } from '/imports/modules/utils';
 
 import { Product } from '/imports/api/product/product_collection';
 
-const cancelProduct = (productId, shopId, event) => {
-  console.log('cancel belum dibuat');
-};
 
 const buyProduct = (productId, shopId, event) => {
   const qty = Number(document.getElementById("qty").value);
-  console.log('shopId',shopId);
-  console.log('productId',productId);
-  console.log('qty',qty);
 
   Meteor.call('putProductToCart', {shopId, productId, qty}, function(error,result){
 	  if(error){
@@ -62,7 +56,6 @@ const ProductDetail = ({product}) => {
 					      </InputGroup>
 					    </FormGroup>
 	          	<Button bsStyle="success" onClick={ buyProduct.bind(this, product._id, product.shopId) } >Buy Now</Button>
-	          	<Button bsStyle="danger" onClick={ cancelProduct.bind(this, product._id, product.shopId) } >Cancel</Button>
 	          </form>
 	          <p>&nbsp;</p>
 	        </Col>
