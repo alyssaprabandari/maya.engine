@@ -20,6 +20,12 @@ const APIs = {
     type: apiType,
     status: 'Active',
   },
+  changeProductQtyInCart: {
+    name: 'changeProductQtyInCart',
+    description: 'change quantity of selected product in cart while status still Open',
+    type: apiType,
+    status: 'Active',
+  },
 };
 
 initAPIsToDB(APIs, apiType);
@@ -33,12 +39,6 @@ export const putProductToCart = new ValidatedMethod({
   }).validator(),
   run({shopId, productId, qty}) {
     let trxId;  
-
-
-    console.log('shopId', shopId); 
-    console.log('productId', productId); 
-    console.log('qty', qty);
-
     try{
       // now sanity check
       if(!this.userId)
@@ -63,8 +63,6 @@ export const putProductToCart = new ValidatedMethod({
       let trx = Trx.findOne({buyer:{partyId:this.userId, partyType:'Member'}, tenantId: tenantId, shopId: shopId, status:'Open'});
 
       if(!trx){
-      	console.log('gak ada trx dengan buyer dan shop');
-
       	const subTotal = product.unitPrice * qty;
 
       	const trxItem = {
@@ -80,7 +78,7 @@ export const putProductToCart = new ValidatedMethod({
       	};
 
       	trx = {
-      		name 			: 'Sales Order',
+      		name 			: 'Order - '+shop.name,
       		buyer 		: {
       			partyId 	: this.userId,
       			partyType	: 'Member'
@@ -95,14 +93,10 @@ export const putProductToCart = new ValidatedMethod({
       	};
 
 				trxId = Trx.insert(trx);
-
       }else{
-      	console.log('ada, trxId:', trx._id);
-
       	const trxItem = _.findWhere(trx.trxItems,{productId:product._id});
 
       	if(!trxItem){
-      		console.log('gak ada trxItem sama');
       		const subTotal = product.unitPrice * qty;
 
 	      	const trxItem = {
@@ -124,9 +118,7 @@ export const putProductToCart = new ValidatedMethod({
       				$set:{total:trx.total+subTotal}
       			}
       		);
-
       	}else{
-      		console.log('ada trxItem sama');
       		if(trxItem.qty !== qty){
       			const subTotalNew = product.unitPrice * qty;
       			const subTotalOld = trxItem.subTotal;
@@ -146,25 +138,73 @@ export const putProductToCart = new ValidatedMethod({
 	      		);
       		};
       	};
-
       	trxId = trx._id;
       }
-
       return trxId;
-
     }catch(exception){
       console.log('EXCEPTION - '+APIs.putProductToCart.name+' - '+apiType+' - userId: '+this.userId, exception);
       console.log('trxId:', trxId);
       throw new Meteor.Error(400,'Internal Server Exception');
     }
   }
+});
+
+export const changeProductQtyInCart = new ValidatedMethod({
+  name: APIs.changeProductQtyInCart.name,
+  validate: new SimpleSchema({
+    trxId 		: { type: SimpleSchema.RegEx.Id },
+    productId	: { type: SimpleSchema.RegEx.Id },
+    qtyNew 		: { type: Number },
+  }).validator(),
+  run({trxId, productId, qtyNew}) {
+    try{
+      // now sanity check
+      if(!this.userId)
+        throw new Meteor.Error(401, 'You must be logged in.');
+
+      const tenantId = isUserHasAccess(this.userId, this.connection, APIs.putProductToCart.name, apiType);
+    
+      let trx = Trx.findOne({_id:trxId, buyer:{partyId:this.userId, partyType:'Member'}, status:'Open'});
+
+      if(!trx)
+      	throw new Meteor.Error(474,'Trx not Found');
+      if(trx.tenantId !== tenantId)
+      	throw new Meteor.Error(476,'Trx not match with Tenant');
+
+    	const trxItem = _.findWhere(trx.trxItems,{productId:productId});
+
+    	if(!trxItem)
+				throw new Meteor.Error(475,'TrxItem not Found');
+
+			const subTotalNew = trxItem.unitPrice * qtyNew;
+			const subTotalOld = trxItem.subTotal;
+
+			return Trx.update(
+  			{ 
+  				_id 									: trx._id, 
+  				"trxItems.productId" 	: trxItem.productId
+  			},
+  			{
+  				$set:{
+  					"trxItems.$.qty" 			: qtyNew,
+  					"trxItems.$.subTotal" : subTotalNew,
+  					total 								: trx.total - subTotalOld + subTotalNew
+  				}
+  			}
+  		);
+
+    }catch(exception){
+      console.log('EXCEPTION - '+APIs.putProductToCart.name+' - '+apiType+' - userId: '+this.userId, exception);
+      throw new Meteor.Error(400,'Internal Server Exception');
+    }
+  }
 
 });
 
-
 rateLimit({
   methods: [
-  	putProductToCart
+  	putProductToCart,
+  	changeProductQtyInCart
   ],
   limit: 5,
   timeRange: 1000,

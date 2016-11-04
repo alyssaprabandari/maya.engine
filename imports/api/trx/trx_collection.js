@@ -5,6 +5,8 @@ import { Factory } from 'meteor/dburles:factory';
 
 import { _RefSchema, _PartySchema, _GeneralSchema } from '/imports/api/general_schemas';
 
+import { Shop } from '/imports/api/shop/shop_collection.js';
+
 class TrxCollection extends Mongo.Collection {
 	insert(doc, callback) {
     const result = super.insert(doc, callback);
@@ -155,7 +157,12 @@ Trx.publicFields = {
 };
 
 Trx.helpers({
-
+	shop(){
+    return Shop.findOne(this.shopId);
+  },
+  buyer(){
+  	//FIXME
+  }
 });
 
 
