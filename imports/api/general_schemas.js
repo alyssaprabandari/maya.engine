@@ -146,7 +146,7 @@ export const _GeneralSchema = new SimpleSchema({
         } else if (this.isUpsert) {
           return {$setOnInsert: this.userId};
         } else {
-          this.unset();
+          this.unset(); // Prevent user from supplying their own value
         }
     }
   },
@@ -173,7 +173,11 @@ export const _GeneralSchema = new SimpleSchema({
     type: Date,
     label: 'Latest Timestamp',
     autoValue : function(){
-      return new Date();
+    	if (this.isInsert) {
+        return this.field("createdAt").value;
+      } else {
+      	return new Date();
+      }
     },
   },
 
