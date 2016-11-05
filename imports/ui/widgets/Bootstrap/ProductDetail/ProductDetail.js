@@ -12,15 +12,22 @@ import { Product } from '/imports/api/product/product_collection';
 
 
 const buyProduct = (productId, shopId, event) => {
-  const qty = Number(document.getElementById("qty").value);
+  try{
+  	const qty = Number(document.getElementById("qty").value);
 
-  Meteor.call('putProductToCart', {shopId, productId, qty}, function(error,result){
-	  if(error){
-	    Bert.alert(error.message+', please contact helpdesk of '+Meteor.settings.public.tenant,'danger');
-	  }else{
-	    Bert.alert('Put in Cart', 'success');
-	  };
-	});
+  	if(isNaN(qty) || qty === 0)
+      throw "Quantity may not empty";
+
+	  Meteor.call('putProductToCart', {shopId, productId, qty}, function(error,result){
+		  if(error){
+		    Bert.alert(error.message+', please contact helpdesk of '+Meteor.settings.public.tenant,'danger');
+		  }else{
+		    Bert.alert('Put in Cart', 'success');
+		  };
+		});
+  }catch(exception){
+  	Bert.alert(exception,'danger');
+  }
 };
 
 const handleSubmit = (event) => {
