@@ -35,6 +35,7 @@ Trx.deny({
 const _TrxItemSchema = new SimpleSchema({
 	trxItemNr:{
 		type: Number,
+    optional: true
 	},
 	productId:{
 		type: SimpleSchema.RegEx.Id,

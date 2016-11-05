@@ -299,6 +299,14 @@ if(process.env.NODE_ENV === 'development'){
 		    "roles" : ["Member.Free"],
 		    "type" 	: "Trx.Method"
 		  },{
+		    "name" 	: "removeProductInCart",
+		    "roles" : ["Member.Free"],
+		    "type" 	: "Trx.Method"
+		  },{
+		    "name" 	: "removeTrxInCart",
+		    "roles" : ["Member.Free"],
+		    "type" 	: "Trx.Method"
+		  },{
 		    "name" 	: "listCart",
 		    "roles" : ["Member.Free"],
 		    "type" 	: "Trx.Publication"
